@@ -39,8 +39,6 @@ s.dependency 'Masonry'
 
 s.dependency 'SDWebImage'
 
-s.dependency 'YYModel'
-
 s.dependency 'LLSimpleCamera'
 
 s.dependency 'MBProgressHUD'
