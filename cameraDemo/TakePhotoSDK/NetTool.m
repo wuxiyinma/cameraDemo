@@ -8,6 +8,7 @@
 
 #import "NetTool.h"
 #import <UIKit+AFNetworking.h>
+#import "specInfo.h"
 
 @implementation NetTool
 
@@ -33,10 +34,10 @@
                           
                           @"file":encodedImageStr,
                           
-                          @"spec_id":@(486),
-                          @"app_key":@"e22ba940d755aba4053458f1173e7f51d1f89190",
+                          @"spec_id":@([specInfo spec_id]),
+                          @"app_key":[specInfo app_key],
                           
-                          @"is_fair":@(0)
+                          @"is_fair":@([specInfo isFair])
                           
                           };
     

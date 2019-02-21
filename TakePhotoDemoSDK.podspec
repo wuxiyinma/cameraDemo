@@ -22,7 +22,7 @@ s.resource  = "cameraDemo/TakePhotoSDK/Image.bundle"
 
 s.source       = { :git => "https://git.coding.net/smallLufei/cameraDemo.git", :tag => "#{s.version}" }
 
-s.source_files  = "TakePhotoSDK","cameraDemo/TakePhotoSDK/*.{h,m}"
+s.source_files  = "TakePhotoSDK","cameraDemo/TakePhotoSDK/*.*"
 
 s.frameworks = 'Foundation', 'UIKit'
 
