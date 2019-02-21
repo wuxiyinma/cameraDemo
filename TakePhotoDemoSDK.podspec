@@ -24,6 +24,10 @@ s.source       = { :git => "https://git.coding.net/smallLufei/cameraDemo.git", :
 
 s.source_files  = "TakePhotoSDK","cameraDemo/TakePhotoSDK/*.*"
 
+s.preserve_paths = "cameraDemo/lib/specInfo.h"
+
+s.vendored_libraries = "cameraDemo/lib/libspecInfo.a"
+
 s.frameworks = 'Foundation', 'UIKit'
 
 s.dependency 'AFNetworking', '~> 3.0'
