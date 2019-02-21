@@ -88,7 +88,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
         }];
 
         UIImageView *imageView = [UIImageView new];
-        imageView.image = [UIImage imageNamed:@"分组 4"];
+        imageView.image = [UIImage imageNamed:@"Image.bundle/分组 4"];
         [_previewImageView addSubview:imageView];
 
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -210,7 +210,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     
     // 背景图片
     UIImageView *cameraBack = [[UIImageView alloc] init];
-    cameraBack.image = [UIImage imageNamed:@"拍照区"];
+    cameraBack.image = [UIImage imageNamed:@"Image.bundle/拍照区"];
     [self.camera.view addSubview:cameraBack];
     CGFloat imageH = 4/3.0 * kAPPW;
     
@@ -262,7 +262,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     // 拍摄按钮
     self.snapButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.snapButton addTarget:self action:@selector(snapButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.snapButton setImage:[UIImage imageNamed:@"分组"] forState:UIControlStateNormal];
+    [self.snapButton setImage:[UIImage imageNamed:@"Image.bundle/分组"] forState:UIControlStateNormal];
     [snapBtnView addSubview:self.snapButton];
     
     [self.snapButton mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -276,7 +276,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     // 切换前后置摄像头
     if([LLSimpleCamera isFrontCameraAvailable] && [LLSimpleCamera isRearCameraAvailable]) {
         UIButton *changeCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [changeCameraBtn setImage:[UIImage imageNamed:@"反转镜头-线性"] forState:UIControlStateNormal];
+        [changeCameraBtn setImage:[UIImage imageNamed:@"Image.bundle/反转镜头-线性"] forState:UIControlStateNormal];
         [changeCameraBtn addTarget:self action:@selector(pressChangeCameraBtn) forControlEvents:UIControlEventTouchUpInside];
         [snapBtnView addSubview:changeCameraBtn];
         
@@ -291,7 +291,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     // 打开相册
     UIButton *openPhotoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.albumBu = openPhotoBtn;
-    [openPhotoBtn setImage:[UIImage imageNamed:@"相册"] forState:UIControlStateNormal];
+    [openPhotoBtn setImage:[UIImage imageNamed:@"Image.bundle/相册"] forState:UIControlStateNormal];
     [openPhotoBtn addTarget:self action:@selector(openAlbum) forControlEvents:UIControlEventTouchUpInside];
     [snapBtnView addSubview:openPhotoBtn];
     

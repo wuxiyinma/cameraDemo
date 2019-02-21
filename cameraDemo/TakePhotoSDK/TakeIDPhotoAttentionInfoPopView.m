@@ -83,7 +83,7 @@
         
         _verbImageView = [[UIImageView alloc] init];
         
-        _verbImageView.image = [UIImage imageNamed:@"举例照片"];
+        _verbImageView.image = [UIImage imageNamed:@"Image.bundle/举例照片"];
         
     }
     

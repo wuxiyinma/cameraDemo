@@ -132,7 +132,7 @@
         
         UIButton *reTakePhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [reTakePhotoButton addTarget:self action:@selector(pressReTakePhotoButton) forControlEvents:UIControlEventTouchUpInside];
-        [reTakePhotoButton setImage:[UIImage imageNamed:@"分组"] forState:UIControlStateNormal];
+        [reTakePhotoButton setImage:[UIImage imageNamed:@"Image.bundle/分组"] forState:UIControlStateNormal];
         [bottomView addSubview:reTakePhotoButton];
         
         [reTakePhotoButton mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -14,6 +14,7 @@
 		1F1B3C87221E419F00802840 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C7F221E419F00802840 /* MBProgressHUD+MJ.m */; };
 		1F1B3C88221E419F00802840 /* UIColor+NJColorTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C81221E419F00802840 /* UIColor+NJColorTool.m */; };
 		1F1B3C89221E419F00802840 /* MK_Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C82221E419F00802840 /* MK_Device.m */; };
+		1F1B3CF7221E4E5700802840 /* Image.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F1B3CF6221E4E5700802840 /* Image.bundle */; };
 		1FA254E2221A34CD00A55262 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA254E1221A34CD00A55262 /* AppDelegate.m */; };
 		1FA254E5221A34CD00A55262 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA254E4221A34CD00A55262 /* ViewController.m */; };
 		1FA254E8221A34CD00A55262 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA254E6221A34CD00A55262 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		1F1B3C80221E419F00802840 /* TakePhotoResultVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePhotoResultVC.h; sourceTree = "<group>"; };
 		1F1B3C81221E419F00802840 /* UIColor+NJColorTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+NJColorTool.m"; sourceTree = "<group>"; };
 		1F1B3C82221E419F00802840 /* MK_Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MK_Device.m; sourceTree = "<group>"; };
+		1F1B3CF6221E4E5700802840 /* Image.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Image.bundle; sourceTree = "<group>"; };
 		1FA254DD221A34CD00A55262 /* cameraDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cameraDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA254E0221A34CD00A55262 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1FA254E1221A34CD00A55262 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 		1F1B3C74221E419F00802840 /* TakePhotoSDK */ = {
 			isa = PBXGroup;
 			children = (
+				1F1B3CF6221E4E5700802840 /* Image.bundle */,
 				1F1B3C78221E419F00802840 /* MBProgressHUD+MJ.h */,
 				1F1B3C7F221E419F00802840 /* MBProgressHUD+MJ.m */,
 				1F1B3C7B221E419F00802840 /* MK_Device.h */,
@@ -199,6 +202,7 @@
 				1FA254ED221A34CF00A55262 /* LaunchScreen.storyboard in Resources */,
 				1FA254EA221A34CF00A55262 /* Assets.xcassets in Resources */,
 				1FA254E8221A34CD00A55262 /* Main.storyboard in Resources */,
+				1F1B3CF7221E4E5700802840 /* Image.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

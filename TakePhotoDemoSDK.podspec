@@ -6,27 +6,21 @@ s.name         = "TakePhotoSDK"
 s.version      = "0.0.1"
 s.summary      = "拍照SDK～"
 
-
 s.description  = <<-DESC
 拍照SDK～
 DESC
 
 s.homepage     = "https://git.coding.net/smallLufei/cameraDemo.git"
 
-
-
 s.license      = "MIT"
 
-
-s.author       = { "lufei" => "372154465@qq.com" }
-
-
+s.author       = { "lufei" => "small@small.com" }
 
 s.platform     = :ios, "8.0"
 
+s.resource  = "cameraDemo/TakePhotoSDK/Image.bundle"
 
 s.source       = { :git => "https://git.coding.net/smallLufei/cameraDemo.git", :tag => "#{s.version}" }
-
 
 s.source_files  = "TakePhotoSDK","cameraDemo/TakePhotoSDK/*.{h,m}"
 
