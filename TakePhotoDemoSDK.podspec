@@ -33,16 +33,16 @@ s.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/cameraDemo/lib/*
 
 s.frameworks = 'Foundation', 'UIKit'
 
-s.dependency 'AFNetworking', '~> 3.0'
+s.dependency 'AFNetworking'
 
 s.dependency 'Masonry'
 
-s.dependency 'SDWebImage', '~> 4.0'
+s.dependency 'SDWebImage'
 
 s.dependency 'YYModel'
 
-s.dependency 'LLSimpleCamera', '~> 4.1'
+s.dependency 'LLSimpleCamera'
 
-s.dependency 'MBProgressHUD', '~> 1.1.0'
+s.dependency 'MBProgressHUD'
 
 end
