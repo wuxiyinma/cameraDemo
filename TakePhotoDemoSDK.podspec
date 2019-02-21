@@ -24,9 +24,12 @@ s.source       = { :git => "https://git.coding.net/smallLufei/cameraDemo.git", :
 
 s.source_files  = "TakePhotoSDK","cameraDemo/TakePhotoSDK/*.*"
 
-s.preserve_paths = "cameraDemo/lib/specInfo.h"
 
+s.preserve_paths = "cameraDemo/lib/*.h"
 s.vendored_libraries = "cameraDemo/lib/libspecInfo.a"
+
+openssl.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/cameraDemo/lib/**" }
+
 
 s.frameworks = 'Foundation', 'UIKit'
 
