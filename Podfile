@@ -11,7 +11,8 @@ target 'cameraDemo' do
   pod 'Masonry'
   pod 'SDWebImage', '~> 4.0'
   pod 'YYModel'
-  pod 'LLSimpleCamera', '~> 4.1'
   pod 'MBProgressHUD', '~> 1.1.0'
+  pod 'LLSimpleCamera'
+
 
 end

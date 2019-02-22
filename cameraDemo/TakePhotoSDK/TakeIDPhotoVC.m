@@ -345,7 +345,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     
     [self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
         
-        [weakSelf.camera start];
+//        [weakSelf.camera start];
         
         if (!error) {
             
