@@ -15,6 +15,7 @@
 #import "TakePhotoResultVC.h"
 #import "NetTool.h"
 #import "MBProgressHUD+MJ.h"
+#import "UIImage+ImageTool.h"
 
 static CGFloat scanTime = 3.0;
 static CGFloat scanLineWidth = 42;
@@ -401,7 +402,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     //获取照片的原图数据
     UIImage *original = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    NSData *originalData = UIImageJPEGRepresentation(original, 0.5);
+    NSData *originalData = UIImageJPEGRepresentation([UIImage fixOrientation:original], 0.5);
     
     [self check_createPhoto:originalData];
     

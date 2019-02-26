@@ -33,10 +33,8 @@
     NSDictionary *dic = @{
                           
                           @"file":encodedImageStr,
-                          
                           @"spec_id":@([specInfo spec_id]),
                           @"app_key":[specInfo app_key],
-                          
                           @"is_fair":@([specInfo isFair])
                           
                           };

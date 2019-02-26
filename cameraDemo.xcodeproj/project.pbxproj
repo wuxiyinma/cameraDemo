@@ -22,6 +22,7 @@
 		1FA254EA221A34CF00A55262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA254E9221A34CF00A55262 /* Assets.xcassets */; };
 		1FA254ED221A34CF00A55262 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA254EB221A34CF00A55262 /* LaunchScreen.storyboard */; };
 		1FA254F0221A34CF00A55262 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA254EF221A34CF00A55262 /* main.m */; };
+		1FF32C1E2224E9BC007F298D /* UIImage+ImageTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF32C1D2224E9BC007F298D /* UIImage+ImageTool.m */; };
 		8694E6D4496B86011A760ED6 /* libPods-cameraDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0205BDA7359EA11776B5025 /* libPods-cameraDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,8 @@
 		1FA254EC221A34CF00A55262 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FA254EE221A34CF00A55262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FA254EF221A34CF00A55262 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1FF32C1C2224E9BC007F298D /* UIImage+ImageTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageTool.h"; sourceTree = "<group>"; };
+		1FF32C1D2224E9BC007F298D /* UIImage+ImageTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageTool.m"; sourceTree = "<group>"; };
 		8C104771E726EFA78ECCF32E /* Pods-cameraDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cameraDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-cameraDemo/Pods-cameraDemo.release.xcconfig"; sourceTree = "<group>"; };
 		A0205BDA7359EA11776B5025 /* libPods-cameraDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cameraDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D62646E6CD27294DE28F64F0 /* Pods-cameraDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cameraDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cameraDemo/Pods-cameraDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 				1F1B3C7A221E419F00802840 /* TakePhotoResultVC.m */,
 				1F1B3C79221E419F00802840 /* UIColor+NJColorTool.h */,
 				1F1B3C81221E419F00802840 /* UIColor+NJColorTool.m */,
+				1FF32C1C2224E9BC007F298D /* UIImage+ImageTool.h */,
+				1FF32C1D2224E9BC007F298D /* UIImage+ImageTool.m */,
 			);
 			path = TakePhotoSDK;
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 				1FA254F0221A34CF00A55262 /* main.m in Sources */,
 				1F1B3C88221E419F00802840 /* UIColor+NJColorTool.m in Sources */,
 				1FA254E2221A34CD00A55262 /* AppDelegate.m in Sources */,
+				1FF32C1E2224E9BC007F298D /* UIImage+ImageTool.m in Sources */,
 				1F1B3C85221E419F00802840 /* NetTool.m in Sources */,
 				1F1B3C84221E419F00802840 /* TakePhotoResultVC.m in Sources */,
 				1F1B3C86221E419F00802840 /* TakeIDPhotoVC.m in Sources */,
