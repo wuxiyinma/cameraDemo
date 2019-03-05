@@ -42,9 +42,23 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
 // 相册按钮
 @property (strong, nonatomic) UIButton* albumBu;
 
+// 切换前后置
+@property (strong, nonatomic) UIButton *changeCameraBtn;
+
 @end
 
 @implementation TakeIDPhotoVC
+
+- (void)closeButtonEnable:(BOOL)enable
+{
+    
+    _albumBu.enabled = enable;
+    
+    _snapButton.enabled = enable;
+    
+    _changeCameraBtn.enabled = enable;
+    
+}
 
 - (UIView *)scanLineWithframe: (CGRect)frame{
     if (!_scanLine) {
@@ -80,7 +94,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     if (_previewImageView == nil) {
         
         _previewImageView = [[UIImageView alloc] init];
-        
+        _previewImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.camera.view addSubview:_previewImageView];
         [_previewImageView mas_makeConstraints:^(MASConstraintMaker *make) {
 
@@ -276,10 +290,13 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     
     // 切换前后置摄像头
     if([LLSimpleCamera isFrontCameraAvailable] && [LLSimpleCamera isRearCameraAvailable]) {
+        
         UIButton *changeCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [changeCameraBtn setImage:[UIImage imageNamed:@"Image.bundle/反转镜头-线性"] forState:UIControlStateNormal];
         [changeCameraBtn addTarget:self action:@selector(pressChangeCameraBtn) forControlEvents:UIControlEventTouchUpInside];
         [snapBtnView addSubview:changeCameraBtn];
+        
+        _changeCameraBtn = changeCameraBtn;
         
         [changeCameraBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -287,6 +304,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
             make.left.equalTo(self.snapButton.mas_right).with.offset(50);
             
         }];
+        
     }
     
     // 打开相册
@@ -329,30 +347,30 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
 }
 
 // 防止重复点击
--(void)changeButtonStatus{
-    
-    self.snapButton.enabled =YES;
-    
-}
+//-(void)changeButtonStatus{
+//
+//    self.snapButton.enabled =YES;
+//
+//}
 
 // 拍摄
 - (void)snapButtonPressed:(UIButton *)button
 {
     
-    button.enabled = NO;
-    [self performSelector:@selector(changeButtonStatus) withObject:nil afterDelay:1.0f];
+//    button.enabled = NO;
+//    [self performSelector:@selector(changeButtonStatus) withObject:nil afterDelay:1.0f];
     
     __weak typeof(self) weakSelf = self;
     
     [self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
-        
-//        [weakSelf.camera start];
         
         if (!error) {
             
             [weakSelf check_createPhoto:UIImageJPEGRepresentation(image, 1.0)];
 
             weakSelf.previewImageView.image = image;
+            
+            [self closeButtonEnable:NO];
             
         }
         
@@ -408,6 +426,8 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     
     self.previewImageView.image = original;
     
+    [self closeButtonEnable:NO];
+    
 }
 
 - (void)check_createPhoto:(NSData *)data
@@ -420,6 +440,8 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
             [self.previewImageView removeFromSuperview];
             
             self.previewImageView = nil;
+            
+            [self closeButtonEnable:YES];
             
         }
         
@@ -477,6 +499,8 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
             [self.previewImageView removeFromSuperview];
             
             self.previewImageView = nil;
+            
+            [self closeButtonEnable:YES];
             
         }
         
