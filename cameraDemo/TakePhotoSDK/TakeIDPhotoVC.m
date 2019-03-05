@@ -95,6 +95,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
         
         _previewImageView = [[UIImageView alloc] init];
         _previewImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _previewImageView.backgroundColor = [UIColor stringTOColor:@"#2E2E2E"];
         [self.camera.view addSubview:_previewImageView];
         [_previewImageView mas_makeConstraints:^(MASConstraintMaker *make) {
 
