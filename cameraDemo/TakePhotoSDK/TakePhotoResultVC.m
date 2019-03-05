@@ -215,7 +215,12 @@
         
     }
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //得到当前视图控制器中的所有控制器
+    NSMutableArray *array = [self.navigationController.viewControllers mutableCopy];
+    
+    UIViewController *vc = array[array.count - 3];
+    
+    [self.navigationController popToViewController:vc animated:YES];
     
     if (self.FinalImageResult) {
         
