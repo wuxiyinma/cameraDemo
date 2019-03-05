@@ -198,7 +198,7 @@
     
     if (self = [super init]) {
         
-        self.backgroundColor = [UIColor stringTOColor:@"#363636" alpha:0.3];
+        self.backgroundColor = [UIColor stringTOColor:@"#000000" alpha:0.5];
         
     }
     
