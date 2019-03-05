@@ -12,6 +12,14 @@
 
 @interface TakeIDPhotoAttentionInfoPopView()
 
+{
+    
+    UILabel *_attentionInfo4;
+    
+    UILabel *_attentionInfo5;
+    
+}
+
 @property (strong, nonatomic) UIView *popBackView;
 
 @property (strong, nonatomic) UIImageView *verbImageView;
@@ -161,6 +169,8 @@
             
         }];
         
+        _attentionInfo4 = attentionInfo4;
+        
         UILabel *attentionInfo5 = [self attentionInfoLabelWith:@"• 站在白墙前"];
         [_popBackView addSubview:attentionInfo5];
         
@@ -170,6 +180,8 @@
             make.top.equalTo(attentionInfo4.mas_bottom).with.offset(15);
             
         }];
+        
+        _attentionInfo5 = attentionInfo5;
         
         // 去拍摄
         [_popBackView addSubview:self.takePhotoButton];
@@ -183,7 +195,6 @@
             make.height.mas_equalTo(44);
             
         }];
-        
         
         [self addSubview:_popBackView];
         
@@ -221,6 +232,26 @@
     
     [self layoutIfNeeded];
     
+    UIBezierPath *linePath = [UIBezierPath bezierPath];
+    [linePath moveToPoint:CGPointMake(_attentionInfo4.bounds.origin.x + 10, _attentionInfo4.bounds.size.height - 4)];
+    [linePath addLineToPoint:CGPointMake(_attentionInfo4.bounds.origin.x + _attentionInfo4.bounds.size.width + 15, _attentionInfo4.bounds.size.height - 4.5)];
+    CAShapeLayer *lineLayer = [CAShapeLayer layer];
+    lineLayer.lineWidth = 4;
+    lineLayer.strokeColor = [UIColor stringTOColor:@"#FA8C15" alpha:0.8].CGColor;
+    lineLayer.path = linePath.CGPath;
+    lineLayer.fillColor = nil;
+    [_attentionInfo4.layer addSublayer:lineLayer];
+    
+    UIBezierPath *linePath2 = [UIBezierPath bezierPath];
+    [linePath2 moveToPoint:CGPointMake(_attentionInfo5.bounds.origin.x + 10, _attentionInfo5.bounds.size.height - 4)];
+    [linePath2 addLineToPoint:CGPointMake(_attentionInfo5.bounds.origin.x + _attentionInfo5.bounds.size.width + 15, _attentionInfo5.bounds.size.height - 4.5)];
+    CAShapeLayer *lineLayer2 = [CAShapeLayer layer];
+    lineLayer2.lineWidth = 4;
+    lineLayer2.strokeColor = [UIColor stringTOColor:@"#FA8C15" alpha:0.8].CGColor;
+    lineLayer2.path = linePath2.CGPath;
+    lineLayer2.fillColor = nil;
+    [_attentionInfo5.layer addSublayer:lineLayer2];
+    
     self.popBackView.transform = CGAffineTransformMakeScale(0.1, 0.1);
     self.popBackView.alpha = 0;
     
@@ -249,13 +280,6 @@
     [self removeFromSuperview];
     
 }
-
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//
-//
-//
-//}
 
 // 点击去拍摄
 - (void)pressTakePhotoButton
