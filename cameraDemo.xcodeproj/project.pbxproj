@@ -15,7 +15,7 @@
 		1F1B3C88221E419F00802840 /* UIColor+NJColorTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C81221E419F00802840 /* UIColor+NJColorTool.m */; };
 		1F1B3C89221E419F00802840 /* MK_Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C82221E419F00802840 /* MK_Device.m */; };
 		1F1B3CF9221E69F400802840 /* Image.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F1B3CF8221E69F400802840 /* Image.bundle */; };
-		1F1B3D37221E811300802840 /* libspecInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1B3D36221E811300802840 /* libspecInfo.a */; };
+		1F6E9F36222E765F002F5E23 /* libspecInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6E9F35222E765F002F5E23 /* libspecInfo.a */; };
 		1FA254E2221A34CD00A55262 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA254E1221A34CD00A55262 /* AppDelegate.m */; };
 		1FA254E5221A34CD00A55262 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA254E4221A34CD00A55262 /* ViewController.m */; };
 		1FA254E8221A34CD00A55262 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA254E6221A34CD00A55262 /* Main.storyboard */; };
@@ -43,7 +43,7 @@
 		1F1B3C82221E419F00802840 /* MK_Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MK_Device.m; sourceTree = "<group>"; };
 		1F1B3CF8221E69F400802840 /* Image.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Image.bundle; sourceTree = "<group>"; };
 		1F1B3D35221E811300802840 /* specInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = specInfo.h; sourceTree = "<group>"; };
-		1F1B3D36221E811300802840 /* libspecInfo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libspecInfo.a; sourceTree = "<group>"; };
+		1F6E9F35222E765F002F5E23 /* libspecInfo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libspecInfo.a; sourceTree = "<group>"; };
 		1FA254DD221A34CD00A55262 /* cameraDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cameraDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA254E0221A34CD00A55262 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1FA254E1221A34CD00A55262 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F1B3D37221E811300802840 /* libspecInfo.a in Frameworks */,
+				1F6E9F36222E765F002F5E23 /* libspecInfo.a in Frameworks */,
 				8694E6D4496B86011A760ED6 /* libPods-cameraDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,7 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				1F1B3D35221E811300802840 /* specInfo.h */,
-				1F1B3D36221E811300802840 /* libspecInfo.a */,
+				1F6E9F35222E765F002F5E23 /* libspecInfo.a */,
 			);
 			path = lib;
 			sourceTree = "<group>";
