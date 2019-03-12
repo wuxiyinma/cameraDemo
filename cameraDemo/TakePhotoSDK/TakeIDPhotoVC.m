@@ -224,24 +224,6 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
         }
     }];
     
-    // 背景图片
-    UIImageView *cameraBack = [[UIImageView alloc] init];
-    cameraBack.image = [UIImage imageNamed:@"Image.bundle/拍照区"];
-    [self.camera.view addSubview:cameraBack];
-    CGFloat imageH = 4/3.0 * kAPPW;
-    
-    [cameraBack mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.height.mas_equalTo(imageH);
-        
-        make.top.equalTo(self.camera.view).with.offset([MK_Device navigationBar_StateBarHeight]);
-        
-        make.left.equalTo(self.camera.view).with.offset(0);
-        
-        make.right.equalTo(self.camera.view).with.offset(0);
-        
-    }];
-    
     // 提示语
     UILabel *titleAlertLab = [[UILabel alloc] init];
     titleAlertLab.alpha = 0.9;
@@ -262,6 +244,26 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
         make.height.mas_equalTo(40);
         make.width.mas_equalTo(240);
     }];
+    
+    // 背景图片
+    UIImageView *cameraBack = [[UIImageView alloc] init];
+    cameraBack.image = [UIImage imageNamed:@"Image.bundle/line_img"];
+    [self.camera.view addSubview:cameraBack];
+    CGFloat imageH = 2548.0/2880 * kAPPW;
+    
+    [cameraBack mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.height.mas_equalTo(imageH);
+        
+        make.top.equalTo(titleAlertLab.mas_bottom).with.offset(10);
+        
+        make.left.equalTo(self.camera.view).with.offset(0);
+        
+        make.right.equalTo(self.camera.view).with.offset(0);
+        
+    }];
+    
+    
     
     // 尾部视图
     [self createFooter];

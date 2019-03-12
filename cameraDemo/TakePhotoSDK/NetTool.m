@@ -29,7 +29,6 @@
     
     NSString *encodedImageStr = [data base64EncodedStringWithOptions:1.0f];
     
-    
     NSDictionary *dic = @{
                           
                           @"file":encodedImageStr,
@@ -38,7 +37,6 @@
                           @"is_fair":@([specInfo isFair])
                           
                           };
-    
     
     [NetTool postWithUrl:@"http://apicall.id-photo-verify.com/api/cut_check_pic" para:dic success:^(NSDictionary *dataDic) {
         
