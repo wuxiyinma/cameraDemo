@@ -227,8 +227,8 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     // 提示语
     UILabel *titleAlertLab = [[UILabel alloc] init];
     titleAlertLab.alpha = 0.9;
-    titleAlertLab.backgroundColor = [UIColor colorWithRed:255/255.0 green:136/255.0 blue:0 alpha:1.0f];
-    titleAlertLab.text = @"站在白墙前拍摄效果最佳哦~";
+    titleAlertLab.backgroundColor = [UIColor stringTOColor:@"#FA8C15"];
+    titleAlertLab.text = @"站在白墙前拍摄效果最佳~";
     titleAlertLab.textColor = [UIColor whiteColor];
     titleAlertLab.font = [UIFont systemFontOfSize:16];
     titleAlertLab.textAlignment = 1;
