@@ -16,6 +16,7 @@
 #import "NetTool.h"
 #import "MBProgressHUD+MJ.h"
 #import "UIImage+ImageTool.h"
+#import <Photos/Photos.h>
 
 static CGFloat scanTime = 3.0;
 static CGFloat scanLineWidth = 42;
@@ -349,25 +350,22 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     
 }
 
-// 防止重复点击
-//-(void)changeButtonStatus{
-//
-//    self.snapButton.enabled =YES;
-//
-//}
 
 // 拍摄
 - (void)snapButtonPressed:(UIButton *)button
 {
-    
-//    button.enabled = NO;
-//    [self performSelector:@selector(changeButtonStatus) withObject:nil afterDelay:1.0f];
     
     __weak typeof(self) weakSelf = self;
     
     [self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
         
         if (!error) {
+            
+//            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+//
+//                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+//
+//            }
             
             [weakSelf check_createPhoto:UIImageJPEGRepresentation(image, 1.0)];
 
@@ -491,7 +489,17 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
             
         } else {
             
-            [MBProgressHUD showError:dataDic[@"result"]];
+            if (dataDic[@"result"]) {
+                
+                [MBProgressHUD showError:dataDic[@"result"]];
+                
+            }
+            
+            if (dataDic[@"error"]) {
+                
+                [MBProgressHUD showError:dataDic[@"error"]];
+                
+            }
             
         }
         

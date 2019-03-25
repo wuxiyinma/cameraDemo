@@ -33,6 +33,8 @@
     // 无水印 图片 请求地址（post）
     NSString *_imagePostUrl;
     
+    UIView *_bottomView;
+    
 }
 
 @property (strong, nonatomic) UIImageView *photoImageView;
@@ -79,15 +81,18 @@
 
     self.photoImageView.backgroundColor = [UIColor stringTOColor:@"#F4F4F4"];
     
+    // 尾部视图
+    [self createFooter];
+    
     [self.photoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-       
-        make.width.mas_equalTo(246);
         
-        make.height.mas_equalTo(303);
+        make.width.lessThanOrEqualTo(@246);
+        
+        make.height.lessThanOrEqualTo(@303);
         
         make.centerX.equalTo(self.view);
         
-        make.top.equalTo(self.view).with.offset([MK_Device navigationBar_StateBarHeight] + 44);
+        make.top.equalTo(self.view).with.offset([MK_Device navigationBar_StateBarHeight] + 100);
         
     }];
     
@@ -98,18 +103,21 @@
     // 有水印
     _imageUrlString_wm = [NSString stringWithFormat:@"http://apicall.id-photo-verify.com/api/take_pic_wm/%@", _wmImageUrlArray.lastObject];
     
-    [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:_imageUrlString_wm] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-       
+    [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:_imageUrlString_wm] placeholderImage:[UIImage imageNamed:@"Image.bundle/等待"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+
         if (!error) {
-            
+
             self->_image_wm = image;
             
+            [self -> _photoImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+               
+                make.top.equalTo(self.view).with.offset([MK_Device navigationBar_StateBarHeight] + 44);
+                
+            }];
+
         }
-        
+
     }];
-    
-    // 尾部视图
-    [self createFooter];
     
 }
 
@@ -119,6 +127,8 @@
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor stringTOColor:@"#FBFBFB"];
     [self.view addSubview:bottomView];
+    
+    _bottomView = bottomView;
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         
