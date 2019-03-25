@@ -16,7 +16,7 @@
 #import "NetTool.h"
 #import "MBProgressHUD+MJ.h"
 #import "UIImage+ImageTool.h"
-#import <Photos/Photos.h>
+//#import <Photos/Photos.h>
 
 static CGFloat scanTime = 3.0;
 static CGFloat scanLineWidth = 42;
