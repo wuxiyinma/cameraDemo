@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F073C822251AB8800636D3D /* Image.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F073C812251AB8800636D3D /* Image.bundle */; };
 		1F1B3C83221E419F00802840 /* TakeIDPhotoAttentionInfoPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C75221E419F00802840 /* TakeIDPhotoAttentionInfoPopView.m */; };
 		1F1B3C84221E419F00802840 /* TakePhotoResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C7A221E419F00802840 /* TakePhotoResultVC.m */; };
 		1F1B3C85221E419F00802840 /* NetTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C7C221E419F00802840 /* NetTool.m */; };
@@ -14,7 +15,6 @@
 		1F1B3C87221E419F00802840 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C7F221E419F00802840 /* MBProgressHUD+MJ.m */; };
 		1F1B3C88221E419F00802840 /* UIColor+NJColorTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C81221E419F00802840 /* UIColor+NJColorTool.m */; };
 		1F1B3C89221E419F00802840 /* MK_Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C82221E419F00802840 /* MK_Device.m */; };
-		1F1B3CF9221E69F400802840 /* Image.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F1B3CF8221E69F400802840 /* Image.bundle */; };
 		1F6E9F36222E765F002F5E23 /* libspecInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6E9F35222E765F002F5E23 /* libspecInfo.a */; };
 		1FA254E2221A34CD00A55262 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA254E1221A34CD00A55262 /* AppDelegate.m */; };
 		1FA254E5221A34CD00A55262 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA254E4221A34CD00A55262 /* ViewController.m */; };
@@ -27,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F073C812251AB8800636D3D /* Image.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Image.bundle; sourceTree = "<group>"; };
 		1F1B3C75221E419F00802840 /* TakeIDPhotoAttentionInfoPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeIDPhotoAttentionInfoPopView.m; sourceTree = "<group>"; };
 		1F1B3C76221E419F00802840 /* TakeIDPhotoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeIDPhotoVC.h; sourceTree = "<group>"; };
 		1F1B3C77221E419F00802840 /* NetTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetTool.h; sourceTree = "<group>"; };
@@ -41,7 +42,6 @@
 		1F1B3C80221E419F00802840 /* TakePhotoResultVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePhotoResultVC.h; sourceTree = "<group>"; };
 		1F1B3C81221E419F00802840 /* UIColor+NJColorTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+NJColorTool.m"; sourceTree = "<group>"; };
 		1F1B3C82221E419F00802840 /* MK_Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MK_Device.m; sourceTree = "<group>"; };
-		1F1B3CF8221E69F400802840 /* Image.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Image.bundle; sourceTree = "<group>"; };
 		1F1B3D35221E811300802840 /* specInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = specInfo.h; sourceTree = "<group>"; };
 		1F6E9F35222E765F002F5E23 /* libspecInfo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libspecInfo.a; sourceTree = "<group>"; };
 		1FA254DD221A34CD00A55262 /* cameraDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cameraDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,7 +85,7 @@
 		1F1B3C74221E419F00802840 /* TakePhotoSDK */ = {
 			isa = PBXGroup;
 			children = (
-				1F1B3CF8221E69F400802840 /* Image.bundle */,
+				1F073C812251AB8800636D3D /* Image.bundle */,
 				1F1B3C78221E419F00802840 /* MBProgressHUD+MJ.h */,
 				1F1B3C7F221E419F00802840 /* MBProgressHUD+MJ.m */,
 				1F1B3C7B221E419F00802840 /* MK_Device.h */,
@@ -221,7 +221,7 @@
 				1FA254ED221A34CF00A55262 /* LaunchScreen.storyboard in Resources */,
 				1FA254EA221A34CF00A55262 /* Assets.xcassets in Resources */,
 				1FA254E8221A34CD00A55262 /* Main.storyboard in Resources */,
-				1F1B3CF9221E69F400802840 /* Image.bundle in Resources */,
+				1F073C822251AB8800636D3D /* Image.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
