@@ -9,6 +9,11 @@
 #import "TakeIDPhotoAttentionInfoPopView.h"
 #import "UIColor+NJColorTool.h"
 #import <Masonry.h>
+#import "MK_Device.h"
+
+// 屏幕宽高
+#define kAPPH [[UIScreen mainScreen] bounds].size.height
+#define kAPPW [[UIScreen mainScreen] bounds].size.width
 
 @interface TakeIDPhotoAttentionInfoPopView()
 
@@ -23,6 +28,7 @@
 @property (strong, nonatomic) UIView *popBackView;
 
 @property (strong, nonatomic) UIImageView *verbImageView;
+@property (strong, nonatomic) UIImageView *centerImageView;
 
 @property (strong, nonatomic) UILabel *verbLabel;
 
@@ -90,12 +96,27 @@
     if (_verbImageView == nil) {
         
         _verbImageView = [[UIImageView alloc] init];
-        
-        _verbImageView.image = [UIImage imageNamed:@"Image.bundle/举例照片"];
+        _verbImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _verbImageView.image = [UIImage imageNamed:@"Image.bundle/topImage"];
         
     }
     
     return _verbImageView;
+    
+}
+
+- (UIImageView *)centerImageView
+{
+    
+    if (_centerImageView == nil) {
+        
+        _centerImageView = [[UIImageView alloc] init];
+        _centerImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _centerImageView.image = [UIImage imageNamed:@"Image.bundle/centerImage"];
+        
+    }
+    
+    return _centerImageView;
     
 }
 
@@ -105,93 +126,37 @@
     if (_popBackView == nil) {
         
         _popBackView = [[UIView alloc] init];
-        _popBackView.backgroundColor = [UIColor whiteColor];
+        _popBackView.backgroundColor = [UIColor stringTOColor:@"#F7F7F7"];
         _popBackView.layer.cornerRadius = 10;
         _popBackView.layer.masksToBounds = YES;
         
-        // 示例图片
+        // 顶部图片
         [_popBackView addSubview:self.verbImageView];
         [self.verbImageView mas_makeConstraints:^(MASConstraintMaker *make) {
            
-            make.centerX.equalTo(self->_popBackView);
-            
-            make.top.equalTo(self->_popBackView).with.offset(15);
-            
-        }];
-        
-        // 文字
-        [_popBackView addSubview:self.verbLabel];
-        [self.verbLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.centerX.equalTo(self->_popBackView);
-            make.top.equalTo(self.verbImageView.mas_bottom).with.offset(15);
+            make.left.right.equalTo(self->_popBackView).with.inset(15);
+            make.top.equalTo(self->_popBackView).with.offset(30);
+            make.height.equalTo(self.verbImageView.mas_width).with.multipliedBy(612.0/692.0);
             
         }];
         
-        // 注意事项
-        UILabel *attentionInfo1 = [self attentionInfoLabelWith:@"• 头部摆正"];
-        [_popBackView addSubview:attentionInfo1];
-        
-        [attentionInfo1 mas_makeConstraints:^(MASConstraintMaker *make) {
-           
-            make.left.equalTo(self->_popBackView).with.offset(20);
-            make.top.equalTo(self.verbLabel.mas_bottom).with.offset(20);
-            
+        [_popBackView addSubview:self.centerImageView];
+        /// 中间图片
+        [self.centerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+
+            make.left.right.equalTo(self->_popBackView).with.inset(15);
+            make.top.equalTo(self.verbImageView.mas_bottom).with.offset(18);
+            make.height.equalTo(self.centerImageView.mas_width).with.multipliedBy(300.0/690.0);
+
         }];
-        
-        UILabel *attentionInfo2 = [self attentionInfoLabelWith:@"• 不戴帽子、露出耳朵和额头"];
-        [_popBackView addSubview:attentionInfo2];
-        
-        [attentionInfo2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(attentionInfo1);
-            make.top.equalTo(attentionInfo1.mas_bottom).with.offset(15);
-            
-        }];
-        
-        UILabel *attentionInfo3 = [self attentionInfoLabelWith:@"• 深色衣服"];
-        [_popBackView addSubview:attentionInfo3];
-        
-        [attentionInfo3 mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(attentionInfo1);
-            make.top.equalTo(attentionInfo2.mas_bottom).with.offset(15);
-            
-        }];
-        
-        UILabel *attentionInfo4 = [self attentionInfoLabelWith:@"• 不超出人物示意线"];
-        [_popBackView addSubview:attentionInfo4];
-        
-        [attentionInfo4 mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(attentionInfo1);
-            make.top.equalTo(attentionInfo3.mas_bottom).with.offset(15);
-            
-        }];
-        
-        _attentionInfo4 = attentionInfo4;
-        
-        UILabel *attentionInfo5 = [self attentionInfoLabelWith:@"• 站在白墙前"];
-        [_popBackView addSubview:attentionInfo5];
-        
-        [attentionInfo5 mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(attentionInfo1);
-            make.top.equalTo(attentionInfo4.mas_bottom).with.offset(15);
-            
-        }];
-        
-        _attentionInfo5 = attentionInfo5;
         
         // 去拍摄
         [_popBackView addSubview:self.takePhotoButton];
         [self.takePhotoButton mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.centerX.equalTo(self->_popBackView);
-            make.top.equalTo(attentionInfo5.mas_bottom).with.offset(20);
-            
+            make.bottom.equalTo(self->_popBackView).with.offset(-(35 + [MK_Device safeArea].bottom));
             make.width.mas_equalTo(270);
-            
             make.height.mas_equalTo(44);
             
         }];
@@ -220,57 +185,15 @@
 - (void)open
 {
     
-    [self.popBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+    CGFloat topOffSet = 71.0/667.0 * kAPPW;
+    
+    [self addSubview:self.popBackView];
+    [_popBackView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.center.equalTo(self);
-        
-        make.width.mas_equalTo(320);
-        
-        make.height.mas_equalTo(470);
+        make.left.right.bottom.equalTo(self);
+        make.top.equalTo(self).with.offset(topOffSet + [MK_Device safeArea].top);
         
     }];
-    
-    [self layoutIfNeeded];
-    
-    UIBezierPath *linePath = [UIBezierPath bezierPath];
-    [linePath moveToPoint:CGPointMake(_attentionInfo4.bounds.origin.x + 10, _attentionInfo4.bounds.size.height - 4)];
-    [linePath addLineToPoint:CGPointMake(_attentionInfo4.bounds.origin.x + _attentionInfo4.bounds.size.width + 15, _attentionInfo4.bounds.size.height - 4.5)];
-    CAShapeLayer *lineLayer = [CAShapeLayer layer];
-    lineLayer.lineWidth = 4;
-    lineLayer.strokeColor = [UIColor stringTOColor:@"#FA8C15" alpha:0.8].CGColor;
-    lineLayer.path = linePath.CGPath;
-    lineLayer.fillColor = nil;
-    [_attentionInfo4.layer addSublayer:lineLayer];
-    
-    UIBezierPath *linePath2 = [UIBezierPath bezierPath];
-    [linePath2 moveToPoint:CGPointMake(_attentionInfo5.bounds.origin.x + 10, _attentionInfo5.bounds.size.height - 4)];
-    [linePath2 addLineToPoint:CGPointMake(_attentionInfo5.bounds.origin.x + _attentionInfo5.bounds.size.width + 15, _attentionInfo5.bounds.size.height - 4.5)];
-    CAShapeLayer *lineLayer2 = [CAShapeLayer layer];
-    lineLayer2.lineWidth = 4;
-    lineLayer2.strokeColor = [UIColor stringTOColor:@"#FA8C15" alpha:0.8].CGColor;
-    lineLayer2.path = linePath2.CGPath;
-    lineLayer2.fillColor = nil;
-    [_attentionInfo5.layer addSublayer:lineLayer2];
-    
-    self.popBackView.transform = CGAffineTransformMakeScale(0.1, 0.1);
-    self.popBackView.alpha = 0;
-    
-    // 淡入动画
-    [UIView animateWithDuration:1.0f
-                          delay:0.0f
-         usingSpringWithDamping:0.5f
-          initialSpringVelocity:10.0f
-                        options:UIViewAnimationOptionLayoutSubviews
-                     animations:^{
-                         
-                         self.popBackView.transform = CGAffineTransformMakeScale(1, 1);
-                         self.popBackView.alpha = 1;
-                         
-                     }
-                     completion:^(BOOL finished) {
-                         
-                     }
-     ];
     
 }
 

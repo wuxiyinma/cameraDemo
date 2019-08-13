@@ -264,8 +264,6 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
         
     }];
     
-    
-    
     // 尾部视图
     [self createFooter];
     

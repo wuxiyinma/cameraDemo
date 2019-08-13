@@ -86,9 +86,9 @@
     
     [self.photoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.width.lessThanOrEqualTo(@246);
+        make.width.lessThanOrEqualTo(@200);
         
-        make.height.lessThanOrEqualTo(@303);
+        make.height.lessThanOrEqualTo(@246);
         
         make.centerX.equalTo(self.view);
         
@@ -111,7 +111,15 @@
             
             [self -> _photoImageView mas_updateConstraints:^(MASConstraintMaker *make) {
                
-                make.top.equalTo(self.view).with.offset([MK_Device navigationBar_StateBarHeight] + 44);
+                if (self.type == NJTakePhotoResultDetectionFailed) {
+                    
+                    make.top.equalTo(self.view).with.offset([MK_Device navigationBar_StateBarHeight] + 25);
+                    
+                } else {
+                    
+                    make.top.equalTo(self.view).with.offset([MK_Device navigationBar_StateBarHeight] + 44);
+                    
+                }
                 
             }];
 
@@ -130,15 +138,15 @@
     
     _bottomView = bottomView;
     
-    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.bottom.left.right.equalTo(self.view);
-        
-        make.height.mas_equalTo(2/7.0 * kAPPH);
-        
-    }];
-    
     if (self.type == NJTakePhotoResultDetectionFailed) {
+        
+        [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.bottom.left.right.equalTo(self.view);
+            
+            make.height.mas_equalTo(150 + [MK_Device safeArea].bottom);
+            
+        }];
         
         UIButton *reTakePhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [reTakePhotoButton addTarget:self action:@selector(pressReTakePhotoButton) forControlEvents:UIControlEventTouchUpInside];
@@ -165,6 +173,14 @@
         }];
         
     } else {
+        
+        [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.bottom.left.right.equalTo(self.view);
+            
+            make.height.mas_equalTo(2/7.0 * kAPPH);
+            
+        }];
         
         UIButton *dislikeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         dislikeButton.layer.cornerRadius = 25;
@@ -234,9 +250,7 @@
     
     if (self.FinalImageResult) {
         
-        
         self.FinalImageResult(_imagePostUrl, _imageFileName, _imageUrlString_wm, _image_wm);
-        
         
     }
     
