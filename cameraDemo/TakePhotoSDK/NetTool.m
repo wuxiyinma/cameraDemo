@@ -40,9 +40,7 @@
     
     [NetTool postWithUrl:@"http://apicall.id-photo-verify.com/api/cut_check_pic" para:dic success:^(NSDictionary *dataDic) {
         
-        
         successBlock(dataDic);
-        
         
     } fail:^(NSError *error) {
         

@@ -36,6 +36,9 @@ typedef enum: NSUInteger {
  */
 @property (nonatomic, copy) void (^FinalImageResult)(NSString *finalImageUrlString, NSString *finalImageFileName, NSString *finalWatermarkImageUrlString, UIImage *finalWatermarkImage);
 
+/// 检测项结果字典
+@property (strong, nonatomic) NSDictionary *check_result;
+
 @end
 
 NS_ASSUME_NONNULL_END

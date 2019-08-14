@@ -35,6 +35,12 @@
     
     UIView *_bottomView;
     
+    /// 不合格数组
+    NSMutableArray *_unqualifiedArr;
+    
+    /// 映射字典
+    NSDictionary *_mappingDic;
+    
 }
 
 @property (strong, nonatomic) UIImageView *photoImageView;
@@ -76,6 +82,62 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    /// 初始化不合格数组
+    _unqualifiedArr = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    _mappingDic = @{
+                    
+                    @"background_color": @"背景色",
+                    @"bg_shadow": @"背景阴影",
+                    @"chin_bottom": @"下巴距图像下边缘",
+                    @"clothes_similar": @"服装相似度",
+                    @"eye_space": @"眼部距离",
+                    @"eyes_center_left": @"双眼中心距图像左边缘",
+                    @"eyes_close": @"闭眼程度",
+                    @"eyes_nature": @"视线",
+                    @"eyes_space_bottom": @"双眼中心距图像下边缘",
+                    @"face_blur": @"模糊",
+                    
+                    @"face_center": @"脸部居中",
+                    @"face_color": @"脸部颜色",
+                    @"face_expression": @"脸部表情",
+                    @"face_noise": @"脸部噪音",
+                    @"face_unbalance": @"阴阳脸",
+                    @"facial_pose": @"脸部姿态",
+                    @"facial_shelter": @"脸部遮挡",
+                    @"facial_width": @"脸部宽度",
+                    @"file_size": @"文件大小",
+                    @"glasses": @"眼镜样式",
+                    
+                    @"glasses_glare": @"眼镜反光",
+                    @"hairline_top": @"头顶发际线",
+                    @"head_length": @"头部长度",
+                    @"shoulder_missed": @"肩膀完整性",
+                    @"headpose_pitch": @"头部姿态",
+                    @"headpose_roll": @"头部姿态",
+                    @"headpose_yaw": @"头部姿态",
+                    @"eyebrow_occlusion": @"眉毛遮挡",
+                    @"eye_occlusion": @"眼睛遮挡",
+                    @"nose_occlusion": @"鼻子遮挡",
+                    
+                    @"mouth_occlusion": @"嘴巴遮挡",
+                    @"cheek_occlusion": @"脸颊遮挡",
+                    @"ear_occlusion": @"耳朵遮挡",
+                    @"decoration_occlusion": @"饰品遮挡",
+                    @"ppi": @"分辨率",
+                    @"hat_detection":@"帽子检测",
+                    @"id_exist":@"手持证件照检测",
+                    @"bare_shouldered":@"光膀检测",
+                    @"body_posture":@"身体姿态",
+                    @"face_contrast":@"对比度异常",
+                    
+                    @"face_too_dark":@"照片过暗",
+                    @"lower_body_hanging":@"下半身悬空",
+                    @"incomplete_head":@"头部完整性",
+                    @"missing_shoulder":@"肩膀完整性"
+                    
+                    };
     
     self.view.backgroundColor = [UIColor stringTOColor:@"#F4F4F4"];
 
@@ -126,6 +188,191 @@
         }
 
     }];
+    
+    if (self.type == NJTakePhotoResultDetectionFailed) {
+        
+        /// 请调整以下姿态，重新拍照
+        UILabel *adjustLabel = [UILabel new];
+        adjustLabel.text = @"请调整以下姿态，重新拍照";
+        adjustLabel.textColor = [UIColor stringTOColor:@"#333333"];
+        adjustLabel.font = [UIFont systemFontOfSize:16];
+        [self.view addSubview:adjustLabel];
+        
+        [adjustLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.photoImageView.mas_bottom).with.offset(31);
+            make.centerX.equalTo(self.view);
+            
+        }];
+        
+        UIView *leftLine = [UIView new];
+        leftLine.backgroundColor = [UIColor stringTOColor:@"#C1C1C1"];
+        [self.view addSubview:leftLine];
+        
+        UIView *rightLine = [UIView new];
+        rightLine.backgroundColor = [UIColor stringTOColor:@"#C1C1C1"];
+        [self.view addSubview:rightLine];
+        
+        [leftLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.height.mas_equalTo(1);
+            make.right.equalTo(adjustLabel.mas_left).with.offset(-5);
+            make.width.mas_equalTo(30);
+            make.centerY.equalTo(adjustLabel);
+            
+        }];
+        
+        [rightLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.height.mas_equalTo(1);
+            make.left.equalTo(adjustLabel.mas_right).with.offset(5);
+            make.width.mas_equalTo(30);
+            make.centerY.equalTo(adjustLabel);
+            
+        }];
+        
+        /// 处理检测项结果数组
+        [self.check_result enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+
+            if (![obj boolValue]) {
+
+                if (![key isEqual: @"name"]) {
+
+                    if (self->_unqualifiedArr.count <= 6) {
+
+                        [self->_unqualifiedArr addObject:key];
+
+                    }
+
+                }
+
+            }
+
+        }];
+        
+        [_unqualifiedArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            NSString *checkItem = obj;
+            UIView *view = [self createCheckView:self->_mappingDic[checkItem]];
+            [self.view addSubview:view];
+            
+            if (idx == 0) {
+                
+                [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                    
+                    make.left.equalTo(self.view);
+                    make.width.mas_equalTo(kAPPW/2);
+                    make.height.mas_equalTo(32);
+                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(13);
+                    
+                }];
+                
+            }
+            
+            if (idx == 1) {
+                
+                [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                    
+                    make.right.equalTo(self.view);
+                    make.width.mas_equalTo(kAPPW/2);
+                    make.height.mas_equalTo(32);
+                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(13);
+                    
+                }];
+                
+            }
+            
+            if (idx == 2) {
+                
+                [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                    
+                    make.left.equalTo(self.view);
+                    make.width.mas_equalTo(kAPPW/2);
+                    make.height.mas_equalTo(32);
+                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(13 + 32);
+                    
+                }];
+                
+            }
+            
+            if (idx == 3) {
+                
+                [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                    
+                    make.right.equalTo(self.view);
+                    make.width.mas_equalTo(kAPPW/2);
+                    make.height.mas_equalTo(32);
+                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(13 + 32);
+                    
+                }];
+                
+            }
+            
+            if (idx == 4) {
+                
+                [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                    
+                    make.left.equalTo(self.view);
+                    make.width.mas_equalTo(kAPPW/2);
+                    make.height.mas_equalTo(32);
+                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(13 + 32 + 32);
+                    
+                }];
+                
+            }
+            
+            if (idx == 5) {
+                
+                [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                    
+                    make.right.equalTo(self.view);
+                    make.width.mas_equalTo(kAPPW/2);
+                    make.height.mas_equalTo(32);
+                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(13 + 32 + 32);
+                    
+                }];
+                
+            }
+            
+            
+        }];
+        
+    }
+                             
+}
+
+- (UIView *)createCheckView:(NSString *)checkItemString {
+    
+    UIView *view = [UIView new];
+    view.backgroundColor = [UIColor clearColor];
+    
+    UIImageView *imageView = [UIImageView new];
+    imageView.image = [UIImage imageNamed:@"Image.bundle/chacha"];
+    [view addSubview:imageView];
+    
+    UILabel *label = [UILabel new];
+    label.text = [NSString stringWithFormat:@"%@: 不合格", checkItemString];
+    label.textColor = [UIColor stringTOColor:@"#820014"];
+    label.font = [UIFont systemFontOfSize:12];
+    label.numberOfLines = 0;
+    [view addSubview:label];
+    
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.centerY.equalTo(view).with.offset(42);
+        make.centerY.equalTo(view);
+        
+    }];
+    
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(imageView.mas_right).with.offset(5);
+        make.centerY.equalTo(view);
+        make.right.equalTo(view);
+        
+    }];
+    
+    return view;
     
 }
 
