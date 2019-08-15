@@ -135,7 +135,11 @@
                     @"face_too_dark":@"照片过暗",
                     @"lower_body_hanging":@"下半身悬空",
                     @"incomplete_head":@"头部完整性",
-                    @"missing_shoulder":@"肩膀完整性"
+                    @"missing_shoulder":@"肩膀完整性",
+                    @"sight_line":@"视线水平",
+                    @"shoulder_equal":@"肩膀自然",
+                    @"px_and_mm":@"像素和毫米大小",
+                    @"photo_format":@"文件类型"
                     
                     };
     
