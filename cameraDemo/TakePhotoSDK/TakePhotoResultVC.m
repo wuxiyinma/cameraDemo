@@ -139,7 +139,8 @@
                     @"sight_line":@"视线水平",
                     @"shoulder_equal":@"肩膀自然",
                     @"px_and_mm":@"像素和毫米大小",
-                    @"photo_format":@"文件类型"
+                    @"photo_format":@"文件类型",
+                    @"face_over_kbt":@"过曝光"
                     
                     };
     
