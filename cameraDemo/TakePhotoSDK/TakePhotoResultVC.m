@@ -140,7 +140,8 @@
                     @"shoulder_equal":@"肩膀自然",
                     @"px_and_mm":@"像素和毫米大小",
                     @"photo_format":@"文件类型",
-                    @"face_over_kbt":@"过曝光"
+                    @"face_over_kbt":@"过曝光",
+                    @"mouse_nature":@"嘴巴自然"
                     
                     };
     
