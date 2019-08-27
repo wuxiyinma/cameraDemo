@@ -98,7 +98,6 @@
                     @"eyes_nature": @"视线",
                     @"eyes_space_bottom": @"双眼中心距图像下边缘",
                     @"face_blur": @"模糊",
-                    
                     @"face_center": @"脸部居中",
                     @"face_color": @"脸部颜色",
                     @"face_expression": @"脸部表情",
@@ -109,7 +108,6 @@
                     @"facial_width": @"脸部宽度",
                     @"file_size": @"文件大小",
                     @"glasses": @"眼镜样式",
-                    
                     @"glasses_glare": @"眼镜反光",
                     @"hairline_top": @"头顶发际线",
                     @"head_length": @"头部长度",
@@ -120,7 +118,6 @@
                     @"eyebrow_occlusion": @"眉毛遮挡",
                     @"eye_occlusion": @"眼睛遮挡",
                     @"nose_occlusion": @"鼻子遮挡",
-                    
                     @"mouth_occlusion": @"嘴巴遮挡",
                     @"cheek_occlusion": @"脸颊遮挡",
                     @"ear_occlusion": @"耳朵遮挡",
@@ -131,7 +128,6 @@
                     @"bare_shouldered":@"光膀检测",
                     @"body_posture":@"身体姿态",
                     @"face_contrast":@"对比度异常",
-                    
                     @"face_too_dark":@"照片过暗",
                     @"lower_body_hanging":@"下半身悬空",
                     @"incomplete_head":@"头部完整性",
@@ -201,7 +197,7 @@
         UILabel *adjustLabel = [UILabel new];
         adjustLabel.text = @"请调整以下姿态，重新拍照";
         adjustLabel.textColor = [UIColor stringTOColor:@"#333333"];
-        adjustLabel.font = [UIFont systemFontOfSize:16];
+        adjustLabel.font = [UIFont boldSystemFontOfSize:16];
         [self.view addSubview:adjustLabel];
         
         [adjustLabel mas_makeConstraints:^(MASConstraintMaker *make) {
