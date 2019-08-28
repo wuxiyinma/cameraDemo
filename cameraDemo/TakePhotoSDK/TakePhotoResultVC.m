@@ -71,7 +71,6 @@
         
         _photoImageView = [UIImageView new];
         _photoImageView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.view addSubview:_photoImageView];
         
     }
     
@@ -145,18 +144,36 @@
 
     self.photoImageView.backgroundColor = [UIColor stringTOColor:@"#F4F4F4"];
     
-    // 尾部视图
+    /// 尾部视图
     [self createFooter];
     
+    /// 顶部视图
+    UIView *topView = [UIView new];
+    [self.view addSubview:topView];
+    
+    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.left.right.equalTo(self.view);
+        make.centerX.equalTo(self.view);
+        
+        if (self.type == NJTakePhotoResultDetectionFailed) {
+            
+            make.centerY.equalTo(self.view).with.offset(-(150 + [MK_Device safeArea].bottom - [MK_Device navigationBar_StateBarHeight])/2.0);
+            
+        } else {
+            
+            make.centerY.equalTo(self.view).with.offset(-(2/7.0 * kAPPH - [MK_Device navigationBar_StateBarHeight])/2.0);
+            
+        }
+        
+    }];
+    
+    [topView addSubview:self.photoImageView];
     [self.photoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.width.lessThanOrEqualTo(@200);
-        
         make.height.lessThanOrEqualTo(@246);
-        
-        make.centerX.equalTo(self.view);
-        
-        make.top.equalTo(self.view).with.offset([MK_Device navigationBar_StateBarHeight] + 100);
+        make.centerX.top.equalTo(topView);
         
     }];
     
@@ -173,20 +190,6 @@
 
             self->_image_wm = image;
             
-            [self -> _photoImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-               
-                if (self.type == NJTakePhotoResultDetectionFailed) {
-                    
-                    make.top.equalTo(self.view).with.offset([MK_Device navigationBar_StateBarHeight] + 25);
-                    
-                } else {
-                    
-                    make.top.equalTo(self.view).with.offset([MK_Device navigationBar_StateBarHeight] + 44);
-                    
-                }
-                
-            }];
-
         }
 
     }];
@@ -198,7 +201,7 @@
         adjustLabel.text = @"请调整以下姿态，重新拍照";
         adjustLabel.textColor = [UIColor stringTOColor:@"#333333"];
         adjustLabel.font = [UIFont boldSystemFontOfSize:16];
-        [self.view addSubview:adjustLabel];
+        [topView addSubview:adjustLabel];
         
         [adjustLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -209,11 +212,11 @@
         
         UIView *leftLine = [UIView new];
         leftLine.backgroundColor = [UIColor stringTOColor:@"#C1C1C1"];
-        [self.view addSubview:leftLine];
+        [topView addSubview:leftLine];
         
         UIView *rightLine = [UIView new];
         rightLine.backgroundColor = [UIColor stringTOColor:@"#C1C1C1"];
-        [self.view addSubview:rightLine];
+        [topView addSubview:rightLine];
         
         [leftLine mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -252,11 +255,15 @@
 
         }];
         
+        static UIView *lastView;
+        
         [_unqualifiedArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             NSString *checkItem = obj;
             UIView *view = [self createCheckView:self->_mappingDic[checkItem]];
-            [self.view addSubview:view];
+            [topView addSubview:view];
+            
+            lastView = view;
             
             if (idx == 0) {
                 
@@ -336,6 +343,20 @@
                 
             }
             
+            
+        }];
+        
+        [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.bottom.equalTo(lastView);
+            
+        }];
+        
+    } else {
+        
+        [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.bottom.equalTo(self.photoImageView);
             
         }];
         
