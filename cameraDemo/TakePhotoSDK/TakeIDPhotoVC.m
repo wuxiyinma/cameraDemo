@@ -468,7 +468,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
             } else {
                 
                 TakePhotoResultVC *result = [[TakePhotoResultVC alloc] initWithType:NJTakePhotoResultDetectionFailed];
-                result.check_result = dataDic[@"result"][@"check_result"];
+                result.not_check_result = dataDic[@"not_check_result"];
                 result.wmImageUrlArray = dataDic[@"result"][@"file_name_wm"];
                 result.imageUrlArray = dataDic[@"result"][@"file_name"];
                 result.title = @"证件照拍摄";

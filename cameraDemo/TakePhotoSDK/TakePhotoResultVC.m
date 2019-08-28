@@ -38,9 +38,6 @@
     /// 不合格数组
     NSMutableArray *_unqualifiedArr;
     
-    /// 映射字典
-    NSDictionary *_mappingDic;
-    
 }
 
 @property (strong, nonatomic) UIImageView *photoImageView;
@@ -85,60 +82,6 @@
     /// 初始化不合格数组
     _unqualifiedArr = [[NSMutableArray alloc] initWithCapacity:0];
     
-    _mappingDic = @{
-                    
-                    @"background_color": @"背景色",
-                    @"bg_shadow": @"背景阴影",
-                    @"chin_bottom": @"下巴距图像下边缘",
-                    @"clothes_similar": @"服装相似度",
-                    @"eye_space": @"眼部距离",
-                    @"eyes_center_left": @"双眼中心距图像左边缘",
-                    @"eyes_close": @"闭眼程度",
-                    @"eyes_nature": @"视线",
-                    @"eyes_space_bottom": @"双眼中心距图像下边缘",
-                    @"face_blur": @"模糊",
-                    @"face_center": @"脸部居中",
-                    @"face_color": @"脸部颜色",
-                    @"face_expression": @"脸部表情",
-                    @"face_noise": @"脸部噪音",
-                    @"face_unbalance": @"阴阳脸",
-                    @"facial_pose": @"脸部姿态",
-                    @"facial_shelter": @"脸部遮挡",
-                    @"facial_width": @"脸部宽度",
-                    @"file_size": @"文件大小",
-                    @"glasses": @"眼镜样式",
-                    @"glasses_glare": @"眼镜反光",
-                    @"hairline_top": @"头顶发际线",
-                    @"head_length": @"头部长度",
-                    @"shoulder_missed": @"肩膀完整性",
-                    @"headpose_pitch": @"头部姿态",
-                    @"headpose_roll": @"头部姿态",
-                    @"headpose_yaw": @"头部姿态",
-                    @"eyebrow_occlusion": @"眉毛遮挡",
-                    @"eye_occlusion": @"眼睛遮挡",
-                    @"nose_occlusion": @"鼻子遮挡",
-                    @"mouth_occlusion": @"嘴巴遮挡",
-                    @"cheek_occlusion": @"脸颊遮挡",
-                    @"ear_occlusion": @"耳朵遮挡",
-                    @"decoration_occlusion": @"饰品遮挡",
-                    @"ppi": @"分辨率",
-                    @"hat_detection":@"帽子检测",
-                    @"id_exist":@"手持证件照检测",
-                    @"bare_shouldered":@"光膀检测",
-                    @"body_posture":@"身体姿态",
-                    @"face_contrast":@"对比度异常",
-                    @"face_too_dark":@"照片过暗",
-                    @"lower_body_hanging":@"下半身悬空",
-                    @"incomplete_head":@"头部完整性",
-                    @"missing_shoulder":@"肩膀完整性",
-                    @"sight_line":@"视线水平",
-                    @"shoulder_equal":@"肩膀自然",
-                    @"px_and_mm":@"像素和毫米大小",
-                    @"photo_format":@"文件类型",
-                    @"face_over_kbt":@"过曝光",
-                    @"mouse_nature":@"嘴巴自然"
-                    
-                    };
     
     self.view.backgroundColor = [UIColor stringTOColor:@"#F4F4F4"];
 
@@ -237,22 +180,16 @@
         }];
         
         /// 处理检测项结果数组
-        [self.check_result enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-
-            if (![obj boolValue]) {
-
-                if (![key isEqual: @"name"]) {
-
-                    if (self->_unqualifiedArr.count <= 6) {
-
-                        [self->_unqualifiedArr addObject:key];
-
-                    }
-
-                }
-
+        [self.not_check_result enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            NSDictionary *dic = (NSDictionary *)obj;
+            
+            if (self->_unqualifiedArr.count <= 6) {
+                
+                [self->_unqualifiedArr addObject:dic[@"param_message"]];
+                
             }
-
+            
         }];
         
         static UIView *lastView;
@@ -260,7 +197,7 @@
         [_unqualifiedArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             NSString *checkItem = obj;
-            UIView *view = [self createCheckView:self->_mappingDic[checkItem]];
+            UIView *view = [self createCheckView:checkItem];
             [topView addSubview:view];
             
             lastView = view;
