@@ -82,7 +82,6 @@
     /// 初始化不合格数组
     _unqualifiedArr = [[NSMutableArray alloc] initWithCapacity:0];
     
-    
     self.view.backgroundColor = [UIColor stringTOColor:@"#F4F4F4"];
 
     self.photoImageView.backgroundColor = [UIColor stringTOColor:@"#F4F4F4"];
@@ -114,8 +113,8 @@
     [topView addSubview:self.photoImageView];
     [self.photoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.width.lessThanOrEqualTo(@200);
-        make.height.lessThanOrEqualTo(@246);
+        make.width.lessThanOrEqualTo(@150);
+        make.height.lessThanOrEqualTo(@180);
         make.centerX.top.equalTo(topView);
         
     }];
@@ -184,7 +183,7 @@
             
             NSDictionary *dic = (NSDictionary *)obj;
             
-            if (self->_unqualifiedArr.count <= 6) {
+            if (self->_unqualifiedArr.count < 6) {
                 
                 [self->_unqualifiedArr addObject:dic[@"param_message"]];
                 
@@ -351,7 +350,7 @@
             
             make.bottom.left.right.equalTo(self.view);
             
-            make.height.mas_equalTo(150 + [MK_Device safeArea].bottom);
+            make.height.mas_equalTo(140 + [MK_Device safeArea].bottom);
             
         }];
         
