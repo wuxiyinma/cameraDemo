@@ -110,11 +110,14 @@
         
     }];
     
+    CGFloat w = 200/375.0 * kAPPW;
+    CGFloat h = 246/200.0 * w;
+    
     [topView addSubview:self.photoImageView];
     [self.photoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.width.lessThanOrEqualTo(@150);
-        make.height.lessThanOrEqualTo(@180);
+        make.width.lessThanOrEqualTo(@(w));
+        make.height.lessThanOrEqualTo(@(h));
         make.centerX.top.equalTo(topView);
         
     }];
@@ -193,6 +196,10 @@
         
         static UIView *lastView;
         
+        CGFloat insetLeftRight = 22/375.0 * kAPPW;
+        
+        _unqualifiedArr = @[@"ahfsflsafhasklfklas", @"shfsfhlkadsfsaf", @"ahfsflsafhasklfklas", @"shfsfhlkadsfsaf", @"ahfsflsafhasklfklas", @"shfsfhlkadsfsaf"];
+        
         [_unqualifiedArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             NSString *checkItem = obj;
@@ -205,7 +212,7 @@
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
                     
-                    make.left.equalTo(topView).with.inset(42);
+                    make.left.equalTo(topView).with.inset(insetLeftRight);
                     make.height.mas_equalTo(32);
                     make.right.equalTo(topView.mas_centerX);
                     make.top.equalTo(adjustLabel.mas_bottom).with.offset(13);
@@ -218,7 +225,7 @@
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
                     
-                    make.right.equalTo(topView).with.inset(42);
+                    make.right.equalTo(topView).with.inset(insetLeftRight);
                     make.left.equalTo(topView.mas_centerX);
                     make.height.mas_equalTo(32);
                     make.top.equalTo(adjustLabel.mas_bottom).with.offset(13);
@@ -231,7 +238,7 @@
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
                     
-                    make.left.equalTo(topView).with.inset(42);
+                    make.left.equalTo(topView).with.inset(insetLeftRight);
                     make.right.equalTo(topView.mas_centerX);
                     make.height.mas_equalTo(32);
                     make.top.equalTo(adjustLabel.mas_bottom).with.offset(13 + 32);
@@ -244,7 +251,7 @@
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
                     
-                    make.right.equalTo(topView).with.inset(42);
+                    make.right.equalTo(topView).with.inset(insetLeftRight);
                     make.left.equalTo(topView.mas_centerX);
                     make.height.mas_equalTo(32);
                     make.top.equalTo(adjustLabel.mas_bottom).with.offset(13 + 32);
@@ -257,7 +264,7 @@
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
                     
-                    make.left.equalTo(topView).with.inset(42);
+                    make.left.equalTo(topView).with.inset(insetLeftRight);
                     make.right.equalTo(topView.mas_centerX);
                     make.height.mas_equalTo(32);
                     make.top.equalTo(adjustLabel.mas_bottom).with.offset(13 + 32 + 32);
@@ -270,7 +277,7 @@
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
                     
-                    make.right.equalTo(topView).with.inset(42);
+                    make.right.equalTo(topView).with.inset(insetLeftRight);
                     make.left.equalTo(topView.mas_centerX);
                     make.height.mas_equalTo(32);
                     make.top.equalTo(adjustLabel.mas_bottom).with.offset(13 + 32 + 32);
