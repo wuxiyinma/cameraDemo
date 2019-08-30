@@ -89,24 +89,26 @@
     /// 尾部视图
     [self createFooter];
     
+    /// 顶部背景视图
+    UIView *backTopView = [UIView new];
+    [self.view addSubview:backTopView];
+    
+    [backTopView mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.top.equalTo(self.view).offset([MK_Device navigationBar_StateBarHeight]);
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self -> _bottomView.mas_top);
+        
+    }];
+    
     /// 顶部视图
     UIView *topView = [UIView new];
-    [self.view addSubview:topView];
+    [backTopView addSubview:topView];
     
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
        
         make.left.right.equalTo(self.view);
-        make.centerX.equalTo(self.view);
-        
-        if (self.type == NJTakePhotoResultDetectionFailed) {
-            
-            make.centerY.equalTo(self.view).with.offset(-(150 + [MK_Device safeArea].bottom - [MK_Device navigationBar_StateBarHeight])/2.0);
-            
-        } else {
-            
-            make.centerY.equalTo(self.view).with.offset(-(2/7.0 * kAPPH - [MK_Device navigationBar_StateBarHeight])/2.0);
-            
-        }
+        make.center.equalTo(backTopView);
         
     }];
     
@@ -150,7 +152,7 @@
         
         [adjustLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.top.equalTo(self.photoImageView.mas_bottom).with.offset(31);
+            make.top.equalTo(self.photoImageView.mas_bottom).with.offset(20);
             make.centerX.equalTo(self.view);
             
         }];
@@ -196,7 +198,23 @@
         
         static UIView *lastView;
         
-//        CGFloat insetLeftRight = 22/375.0 * kAPPW;
+        CGFloat insetLeftRight;
+        CGFloat lineSpace;
+        CGFloat checkItemH;
+        
+        if (kAPPH < 667) {
+            
+            insetLeftRight = 22/375.0 * kAPPW;
+            lineSpace = 10;
+            checkItemH = 15;
+            
+        } else {
+            
+            insetLeftRight = 42/375.0 * kAPPW;
+            lineSpace = 13;
+            checkItemH = 15;
+            
+        }
         
         [_unqualifiedArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
@@ -210,10 +228,10 @@
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
                     
-                    make.left.equalTo(leftLine).with.offset(-10);
-                    make.height.mas_equalTo(32);
+                    make.left.equalTo(topView).with.offset(insetLeftRight);
+                    make.height.mas_equalTo(checkItemH);
                     make.right.equalTo(topView.mas_centerX);
-                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(13);
+                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(lineSpace);
                     
                 }];
                 
@@ -223,10 +241,10 @@
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
                     
-                    make.right.equalTo(rightLine).with.offset(10);
                     make.left.equalTo(topView.mas_centerX);
-                    make.height.mas_equalTo(32);
-                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(13);
+                    make.right.equalTo(topView).with.offset(-insetLeftRight);
+                    make.height.mas_equalTo(checkItemH);
+                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(lineSpace);
                     
                 }];
                 
@@ -236,10 +254,10 @@
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
                     
-                    make.left.equalTo(leftLine).with.offset(-10);
+                    make.left.equalTo(topView).with.offset(insetLeftRight);
                     make.right.equalTo(topView.mas_centerX);
-                    make.height.mas_equalTo(32);
-                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(13 + 32);
+                    make.height.mas_equalTo(checkItemH);
+                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(lineSpace * 2 + checkItemH);
                     
                 }];
                 
@@ -249,10 +267,10 @@
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
                     
-                    make.right.equalTo(rightLine).with.offset(10);
                     make.left.equalTo(topView.mas_centerX);
-                    make.height.mas_equalTo(32);
-                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(13 + 32);
+                    make.right.equalTo(topView).with.offset(-insetLeftRight);
+                    make.height.mas_equalTo(checkItemH);
+                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(lineSpace * 2 + checkItemH);
                     
                 }];
                 
@@ -262,10 +280,10 @@
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
                     
-                    make.left.equalTo(leftLine).with.offset(-10);
+                    make.left.equalTo(topView).with.offset(insetLeftRight);
                     make.right.equalTo(topView.mas_centerX);
-                    make.height.mas_equalTo(32);
-                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(13 + 32 + 32);
+                    make.height.mas_equalTo(checkItemH);
+                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(lineSpace * 3 + checkItemH + checkItemH);
                     
                 }];
                 
@@ -275,10 +293,10 @@
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
                     
-                    make.right.equalTo(rightLine).with.offset(10);
                     make.left.equalTo(topView.mas_centerX);
-                    make.height.mas_equalTo(32);
-                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(13 + 32 + 32);
+                    make.right.equalTo(topView).with.offset(-insetLeftRight);
+                    make.height.mas_equalTo(checkItemH);
+                    make.top.equalTo(adjustLabel.mas_bottom).with.offset(lineSpace * 3 + checkItemH + checkItemH);
                     
                 }];
                 

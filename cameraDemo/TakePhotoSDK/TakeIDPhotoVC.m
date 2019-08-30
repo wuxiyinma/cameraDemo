@@ -419,7 +419,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     //获取照片的原图数据
     UIImage *original = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    NSData *originalData = UIImageJPEGRepresentation([UIImage fixOrientation:original], 0.5);
+    NSData *originalData = UIImageJPEGRepresentation([UIImage fixOrientation:original], 0.8);
     
     [self check_createPhoto:originalData];
     
