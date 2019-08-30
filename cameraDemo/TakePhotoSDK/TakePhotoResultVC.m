@@ -198,8 +198,6 @@
         
         CGFloat insetLeftRight = 22/375.0 * kAPPW;
         
-        _unqualifiedArr = @[@"ahfsflsafhasklfklas", @"shfsfhlkadsfsaf", @"ahfsflsafhasklfklas", @"shfsfhlkadsfsaf", @"ahfsflsafhasklfklas", @"shfsfhlkadsfsaf"];
-        
         [_unqualifiedArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             NSString *checkItem = obj;
