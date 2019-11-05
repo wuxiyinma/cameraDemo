@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)open;
 
+/// 去相册
+@property (nonatomic, copy) void (^toAlbum)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END

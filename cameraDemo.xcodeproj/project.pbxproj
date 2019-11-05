@@ -406,8 +406,9 @@
 			baseConfigurationReference = D62646E6CD27294DE28F64F0 /* Pods-cameraDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S2M9W9G946;
+				DEVELOPMENT_TEAM = 8R3385G3CM;
 				INFOPLIST_FILE = cameraDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -421,6 +422,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.leqi.cameraDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -430,8 +432,9 @@
 			baseConfigurationReference = 8C104771E726EFA78ECCF32E /* Pods-cameraDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S2M9W9G946;
+				DEVELOPMENT_TEAM = 8R3385G3CM;
 				INFOPLIST_FILE = cameraDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -445,6 +448,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.leqi.cameraDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

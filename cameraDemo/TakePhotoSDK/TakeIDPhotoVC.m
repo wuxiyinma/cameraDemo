@@ -132,14 +132,6 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     
     [super viewWillAppear:animated];
     
-//    if (_previewImageView) {
-//
-//        [self.previewImageView removeFromSuperview];
-//
-//        self.previewImageView = nil;
-//
-//    }
-    
     [self.camera start];
     
 }
@@ -147,27 +139,6 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-//    NSDictionary *dic = @{
-//
-//                          @"file_name":@"a10f6ef234d311e99e8a00163e0070b609630white3",
-//
-//                          @"app_key":@"e22ba940d755aba4053458f1173e7f51d1f89190"
-//
-//                          };
-//
-//    [NetTool postWithUrl:@"http://apicall.id-photo-verify.com/api/take_cut_pic" para:dic  success:^(NSDictionary *dataDic) {
-//
-//        NSData *data = (NSData *)dataDic;
-//
-//        [data writeToFile:@"/Users/lufei/Desktop/123.jpg" atomically:YES];
-//
-//
-//    } fail:^(NSError *error) {
-//
-//
-//
-//    }];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -183,6 +154,12 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     }];
 
     [pop open];
+    
+    pop.toAlbum = ^{
+        
+        [self openAlbum];
+        
+    };
     
     // 初始化相机
     self.camera = [[LLSimpleCamera alloc] initWithQuality:AVCaptureSessionPresetHigh
@@ -265,16 +242,20 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     }];
     
     // 尾部视图
-    [self createFooter];
+    UIView *footer = [self createFooter];
+    [self.view addSubview:footer];
+    [footer mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.top.equalTo(cameraBack.mas_bottom).with.offset(10);
+    }];
     
 }
 
 // 创建尾部视图
-- (void)createFooter
+- (UIView *)createFooter
 {
-    UIView *snapBtnView = [[UIView alloc] initWithFrame:CGRectMake(0, 5/7.0 * kAPPH, kAPPW, 2/7.0 * kAPPH)];
+    UIView *snapBtnView = [[UIView alloc] init];
     snapBtnView.backgroundColor = [UIColor stringTOColor:@"#1c1c1c" alpha:0.8];
-    [self.view addSubview:snapBtnView];
     
     // 拍摄按钮
     self.snapButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -285,8 +266,8 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     [self.snapButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(snapBtnView.mas_centerX);
-        
-        make.centerY.equalTo(snapBtnView.mas_centerY);
+        make.centerY.equalTo(snapBtnView.mas_centerY).with.offset(10);
+        make.width.height.mas_equalTo(76);
         
     }];
     
@@ -324,6 +305,18 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
         
     }];
     
+    /// 电子照证件更易合格
+    UIImageView *eleImageView = [UIImageView new];
+    eleImageView.image = [UIImage imageNamed:@"Image.bundle/eleCheckAcross"];
+    [snapBtnView addSubview:eleImageView];
+    
+    [eleImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.equalTo(openPhotoBtn.mas_top).with.offset(8);
+        make.centerX.equalTo(openPhotoBtn).with.offset(5);
+        
+    }];
+    
     // 卡主本尊请就位
     UILabel *label = [UILabel new];
     label.textAlignment = 1;
@@ -336,15 +329,13 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     [snapBtnView addSubview:label];
     
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.snapButton.mas_top).with.offset(-7.5);
-        
+        make.top.equalTo(snapBtnView).with.offset(10);
         make.centerX.equalTo(self.snapButton);
-        
         make.width.mas_equalTo(140);
-        
         make.height.mas_equalTo(35);
-        
     }];
+    
+    return snapBtnView;
     
 }
 
@@ -358,12 +349,6 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     [self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
         
         if (!error) {
-            
-//            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-//
-//                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-//
-//            }
             
             [weakSelf check_createPhoto:UIImageJPEGRepresentation(image, 1.0)];
 
@@ -419,7 +404,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     //获取照片的原图数据
     UIImage *original = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    NSData *originalData = UIImageJPEGRepresentation([UIImage fixOrientation:original], 0.8);
+    NSData *originalData = UIImageJPEGRepresentation([UIImage fixOrientation:original], 1.0);
     
     [self check_createPhoto:originalData];
     
@@ -464,6 +449,29 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
                     
                 }];
                 
+                result.toPop = ^{
+                    
+                    // 注意事项弹窗
+                    TakeIDPhotoAttentionInfoPopView *pop = [[TakeIDPhotoAttentionInfoPopView alloc] init];
+                    
+                    [[UIApplication sharedApplication].keyWindow addSubview:pop];
+                    
+                    [pop mas_makeConstraints:^(MASConstraintMaker *make) {
+                        
+                        make.edges.equalTo([UIApplication sharedApplication].keyWindow);
+                        
+                    }];
+                    
+                    [pop open];
+                    
+                    pop.toAlbum = ^{
+                        
+                        [self openAlbum];
+                        
+                    };
+                    
+                };
+                
                 
             } else {
                 
@@ -483,6 +491,29 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
                     }
                     
                 }];
+                
+                result.toPop = ^{
+                    
+                    // 注意事项弹窗
+                    TakeIDPhotoAttentionInfoPopView *pop = [[TakeIDPhotoAttentionInfoPopView alloc] init];
+                    
+                    [[UIApplication sharedApplication].keyWindow addSubview:pop];
+                    
+                    [pop mas_makeConstraints:^(MASConstraintMaker *make) {
+                        
+                        make.edges.equalTo([UIApplication sharedApplication].keyWindow);
+                        
+                    }];
+                    
+                    [pop open];
+                    
+                    pop.toAlbum = ^{
+                        
+                        [self openAlbum];
+                        
+                    };
+                    
+                };
                 
             }
             

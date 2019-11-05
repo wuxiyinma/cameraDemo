@@ -491,12 +491,24 @@
     
     [self.navigationController popViewControllerAnimated:YES];
     
+    if (self.toPop) {
+        
+        self.toPop();
+        
+    }
+    
 }
 
 - (void)pressReTakePhotoButton
 {
     
     [self.navigationController popViewControllerAnimated:YES];
+    
+    if (self.toPop) {
+        
+        self.toPop();
+        
+    }
     
 }
 

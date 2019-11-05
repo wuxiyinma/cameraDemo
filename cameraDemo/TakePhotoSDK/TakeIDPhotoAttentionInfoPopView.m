@@ -34,6 +34,8 @@
 
 @property (strong, nonatomic) UIButton *takePhotoButton;
 
+@property (strong, nonatomic) UIButton *toAlbumButtom;
+
 @end
 
 @implementation TakeIDPhotoAttentionInfoPopView
@@ -47,16 +49,43 @@
         
         _takePhotoButton.layer.cornerRadius = 22;
         _takePhotoButton.layer.masksToBounds = YES;
+        _takePhotoButton.layer.borderColor = [UIColor stringTOColor:@"#14AD7E"].CGColor;
+        _takePhotoButton.layer.borderWidth = 1;
         
-        _takePhotoButton.backgroundColor = [UIColor colorWithRed:0 green:179/255.0 blue:125/255.0 alpha:1.0f];
-        [_takePhotoButton setTitle:@"知道了，去拍照" forState:UIControlStateNormal];
-        [_takePhotoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_takePhotoButton setTitleColor:[UIColor colorWithRed:0 green:179/255.0 blue:125/255.0 alpha:1.0f] forState:UIControlStateHighlighted];
+        _takePhotoButton.backgroundColor = UIColor.whiteColor;
+        [_takePhotoButton setImage:[UIImage imageNamed:@"Image.bundle/拍照"] forState:UIControlStateNormal];
+        [_takePhotoButton setTitle:@"去拍照" forState:UIControlStateNormal];
+        [_takePhotoButton setTitleColor:[UIColor stringTOColor:@"#14AD7E"] forState:UIControlStateNormal];
+        _takePhotoButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_takePhotoButton addTarget:self action:@selector(pressTakePhotoButton) forControlEvents:UIControlEventTouchUpInside];
         
     }
     
     return _takePhotoButton;
+    
+}
+
+/// 去相册
+- (UIButton *)toAlbumButtom
+{
+    
+    if (_toAlbumButtom == nil) {
+        
+        _toAlbumButtom = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        _toAlbumButtom.layer.cornerRadius = 22;
+        _toAlbumButtom.layer.masksToBounds = YES;
+        
+        _toAlbumButtom.backgroundColor = [UIColor stringTOColor:@"#14AD7E"];
+        [_toAlbumButtom setImage:[UIImage imageNamed:@"Image.bundle/219相册"] forState:UIControlStateNormal];
+        [_toAlbumButtom setTitle:@"去相册添加电子证件照" forState:UIControlStateNormal];
+        [_toAlbumButtom setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _toAlbumButtom.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_toAlbumButtom addTarget:self action:@selector(pressAlbumButton) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    
+    return _toAlbumButtom;
     
 }
 
@@ -96,7 +125,6 @@
     if (_verbImageView == nil) {
         
         _verbImageView = [[UIImageView alloc] init];
-        _verbImageView.contentMode = UIViewContentModeScaleAspectFit;
         _verbImageView.image = [UIImage imageNamed:@"Image.bundle/topImage"];
         
     }
@@ -111,7 +139,6 @@
     if (_centerImageView == nil) {
         
         _centerImageView = [[UIImageView alloc] init];
-        _centerImageView.contentMode = UIViewContentModeScaleAspectFit;
         _centerImageView.image = [UIImage imageNamed:@"Image.bundle/centerImage"];
         
     }
@@ -135,8 +162,8 @@
         [self.verbImageView mas_makeConstraints:^(MASConstraintMaker *make) {
            
             make.left.right.equalTo(self->_popBackView).with.inset(15);
-            make.top.equalTo(self->_popBackView).with.offset(30);
-            make.height.equalTo(self.verbImageView.mas_width).with.multipliedBy(612.0/692.0);
+            make.top.equalTo(self->_popBackView).with.offset(25);
+            make.height.equalTo(self.verbImageView.mas_width).with.multipliedBy(306/346.0);
             
         }];
         
@@ -145,19 +172,18 @@
         [self.centerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
 
             make.left.right.equalTo(self->_popBackView).with.inset(15);
-            make.top.equalTo(self.verbImageView.mas_bottom).with.offset(18);
-            make.height.equalTo(self.centerImageView.mas_width).with.multipliedBy(300.0/690.0);
+            make.top.equalTo(self.verbImageView.mas_bottom).with.offset(14);
+            make.height.equalTo(self.centerImageView.mas_width).with.multipliedBy(200/346.0);
 
         }];
         
-        // 去拍摄
-        [_popBackView addSubview:self.takePhotoButton];
-        [self.takePhotoButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.centerX.equalTo(self->_popBackView);
-            make.bottom.equalTo(self->_popBackView).with.offset(-(35 + [MK_Device safeArea].bottom));
-            make.width.mas_equalTo(270);
-            make.height.mas_equalTo(44);
+        /// 底部
+        UIView *bottomView = [self bottomView];
+        [_popBackView addSubview:bottomView];
+        [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+           
+            make.top.equalTo(self->_centerImageView.mas_bottom);
+            make.left.right.bottom.equalTo(self->_popBackView);
             
         }];
         
@@ -166,6 +192,41 @@
     }
     
     return _popBackView;
+    
+}
+
+- (UIView *)bottomView
+{
+    
+    UIView *bottomView = [UIView new];
+    
+    CGFloat lastW = (kAPPW - 2 * 15 - 10);
+    CGFloat takeW = lastW * 130/330.0;
+    CGFloat albumW = lastW * 200/330.0;
+    
+    // 去拍摄
+    [bottomView addSubview:self.takePhotoButton];
+    [self.takePhotoButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(bottomView).with.offset(15);
+        make.centerY.equalTo(bottomView);
+        make.width.mas_equalTo(takeW);
+        make.height.mas_equalTo(44);
+        
+    }];
+    
+    /// 去相册
+    [bottomView addSubview:self.toAlbumButtom];
+    [self.toAlbumButtom mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(bottomView).with.offset(-15);
+        make.centerY.equalTo(bottomView);
+        make.width.mas_equalTo(albumW);
+        make.height.mas_equalTo(44);
+        
+    }];
+    
+    return bottomView;
     
 }
 
@@ -185,7 +246,7 @@
 - (void)open
 {
     
-    CGFloat topOffSet = 71.0/667.0 * kAPPW;
+    CGFloat topOffSet = 42.0/667.0 * kAPPW;
     
     [self addSubview:self.popBackView];
     [_popBackView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -209,6 +270,20 @@
 {
     
     [self close];
+    
+}
+
+// 点击去拍照
+- (void)pressAlbumButton
+{
+    
+    [self close];
+    
+    if (self.toAlbum) {
+        
+        self.toAlbum();
+        
+    }
     
 }
 
