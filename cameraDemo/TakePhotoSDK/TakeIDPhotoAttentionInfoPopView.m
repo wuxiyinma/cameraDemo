@@ -160,21 +160,17 @@
         // 顶部图片
         [_popBackView addSubview:self.verbImageView];
         [self.verbImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-           
             make.left.right.equalTo(self->_popBackView).with.inset(15);
             make.top.equalTo(self->_popBackView).with.offset(25);
             make.height.equalTo(self.verbImageView.mas_width).with.multipliedBy(306/346.0);
-            
         }];
         
         [_popBackView addSubview:self.centerImageView];
         /// 中间图片
         [self.centerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-
             make.left.right.equalTo(self->_popBackView).with.inset(15);
             make.top.equalTo(self.verbImageView.mas_bottom).with.offset(14);
             make.height.equalTo(self.centerImageView.mas_width).with.multipliedBy(200/346.0);
-
         }];
         
         /// 底部
