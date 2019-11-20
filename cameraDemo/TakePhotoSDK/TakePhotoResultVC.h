@@ -39,8 +39,8 @@ typedef enum: NSUInteger {
 /// 检测不通过 列表
 @property (strong, nonatomic) NSArray *not_check_result;
 
-/// 返回上一页
-@property (nonatomic, copy) void (^toPop)(void);
+/// 返回上一页 打开弹窗
+@property (nonatomic, copy) void (^toPop)(BOOL isToPop);
 
 @end
 

@@ -320,7 +320,20 @@
         }];
         
     }
-                             
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    
+    [super viewDidDisappear:animated];
+    
+    /// 返回上一页
+    if (self.toPop) {
+        
+        self.toPop(true);
+        
+    }
+    
 }
 
 - (UIView *)createCheckView:(NSString *)checkItemString {
@@ -491,24 +504,12 @@
     
     [self.navigationController popViewControllerAnimated:YES];
     
-    if (self.toPop) {
-        
-        self.toPop();
-        
-    }
-    
 }
 
 - (void)pressReTakePhotoButton
 {
     
     [self.navigationController popViewControllerAnimated:YES];
-    
-    if (self.toPop) {
-        
-        self.toPop();
-        
-    }
     
 }
 

@@ -136,23 +136,20 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     
 }
 
-- (void)viewDidLoad {
-    
-    [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
+/// 打开注意事项弹窗
+- (void)openPopAlert {
     
     // 注意事项弹窗
     TakeIDPhotoAttentionInfoPopView *pop = [[TakeIDPhotoAttentionInfoPopView alloc] init];
-
+    
     [[UIApplication sharedApplication].keyWindow addSubview:pop];
-
+    
     [pop mas_makeConstraints:^(MASConstraintMaker *make) {
-
+        
         make.edges.equalTo([UIApplication sharedApplication].keyWindow);
-
+        
     }];
-
+    
     [pop open];
     
     pop.toAlbum = ^{
@@ -160,6 +157,14 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
         [self openAlbum];
         
     };
+    
+}
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
     
     // 初始化相机
     self.camera = [[LLSimpleCamera alloc] initWithQuality:AVCaptureSessionPresetHigh
@@ -248,6 +253,8 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
         make.left.right.bottom.equalTo(self.view);
         make.top.equalTo(cameraBack.mas_bottom).with.offset(10);
     }];
+    
+    [self openPopAlert];
     
 }
 
@@ -449,29 +456,15 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
                     
                 }];
                 
-                result.toPop = ^{
+                [result setToPop:^(BOOL isToPop) {
                     
-                    // 注意事项弹窗
-                    TakeIDPhotoAttentionInfoPopView *pop = [[TakeIDPhotoAttentionInfoPopView alloc] init];
-                    
-                    [[UIApplication sharedApplication].keyWindow addSubview:pop];
-                    
-                    [pop mas_makeConstraints:^(MASConstraintMaker *make) {
+                    if (isToPop) {
                         
-                        make.edges.equalTo([UIApplication sharedApplication].keyWindow);
+                        [self openPopAlert];
                         
-                    }];
+                    }
                     
-                    [pop open];
-                    
-                    pop.toAlbum = ^{
-                        
-                        [self openAlbum];
-                        
-                    };
-                    
-                };
-                
+                }];
                 
             } else {
                 
@@ -492,28 +485,15 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
                     
                 }];
                 
-                result.toPop = ^{
+                [result setToPop:^(BOOL isToPop) {
                     
-                    // 注意事项弹窗
-                    TakeIDPhotoAttentionInfoPopView *pop = [[TakeIDPhotoAttentionInfoPopView alloc] init];
-                    
-                    [[UIApplication sharedApplication].keyWindow addSubview:pop];
-                    
-                    [pop mas_makeConstraints:^(MASConstraintMaker *make) {
+                    if (isToPop) {
                         
-                        make.edges.equalTo([UIApplication sharedApplication].keyWindow);
+                        [self openPopAlert];
                         
-                    }];
+                    }
                     
-                    [pop open];
-                    
-                    pop.toAlbum = ^{
-                        
-                        [self openAlbum];
-                        
-                    };
-                    
-                };
+                }];
                 
             }
             
