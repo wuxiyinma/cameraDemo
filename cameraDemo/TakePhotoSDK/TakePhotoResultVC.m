@@ -38,6 +38,9 @@
     /// 不合格数组
     NSMutableArray *_unqualifiedArr;
     
+    /// 是否需要pop
+    BOOL _isPop;
+    
 }
 
 @property (strong, nonatomic) UIImageView *photoImageView;
@@ -78,6 +81,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _isPop = true;
     
     /// 初始化不合格数组
     _unqualifiedArr = [[NSMutableArray alloc] initWithCapacity:0];
@@ -330,7 +335,7 @@
     /// 返回上一页
     if (self.toPop) {
         
-        self.toPop(true);
+        self.toPop(_isPop);
         
     }
     
@@ -483,6 +488,8 @@
         return;
         
     }
+    
+    _isPop = false;
     
     //得到当前视图控制器中的所有控制器
     NSMutableArray *array = [self.navigationController.viewControllers mutableCopy];
