@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TakeIDPhotoVC : UIViewController
 
+/// 用户标识
+@property (copy, nonatomic) NSString *orderID;
+
 /**
  获取最终图片
  finalImageUrlString: 最终无水印图片Post请求url

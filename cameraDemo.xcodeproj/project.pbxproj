@@ -15,6 +15,9 @@
 		1F1B3C87221E419F00802840 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C7F221E419F00802840 /* MBProgressHUD+MJ.m */; };
 		1F1B3C88221E419F00802840 /* UIColor+NJColorTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C81221E419F00802840 /* UIColor+NJColorTool.m */; };
 		1F1B3C89221E419F00802840 /* MK_Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B3C82221E419F00802840 /* MK_Device.m */; };
+		1F3E8C002508538D00343250 /* NSData+BWTBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3E8BFA2508538C00343250 /* NSData+BWTBase64.m */; };
+		1F3E8C012508538D00343250 /* RSA+SHA1WithRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3E8BFB2508538C00343250 /* RSA+SHA1WithRSA.m */; };
+		1F3E8C022508538D00343250 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3E8BFF2508538D00343250 /* RSA.m */; };
 		1F6E9F36222E765F002F5E23 /* libspecInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6E9F35222E765F002F5E23 /* libspecInfo.a */; };
 		1FA254E2221A34CD00A55262 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA254E1221A34CD00A55262 /* AppDelegate.m */; };
 		1FA254E5221A34CD00A55262 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA254E4221A34CD00A55262 /* ViewController.m */; };
@@ -43,6 +46,12 @@
 		1F1B3C81221E419F00802840 /* UIColor+NJColorTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+NJColorTool.m"; sourceTree = "<group>"; };
 		1F1B3C82221E419F00802840 /* MK_Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MK_Device.m; sourceTree = "<group>"; };
 		1F1B3D35221E811300802840 /* specInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = specInfo.h; sourceTree = "<group>"; };
+		1F3E8BFA2508538C00343250 /* NSData+BWTBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+BWTBase64.m"; sourceTree = "<group>"; };
+		1F3E8BFB2508538C00343250 /* RSA+SHA1WithRSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RSA+SHA1WithRSA.m"; sourceTree = "<group>"; };
+		1F3E8BFC2508538C00343250 /* RSA+SHA1WithRSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RSA+SHA1WithRSA.h"; sourceTree = "<group>"; };
+		1F3E8BFD2508538D00343250 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
+		1F3E8BFE2508538D00343250 /* NSData+BWTBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+BWTBase64.h"; sourceTree = "<group>"; };
+		1F3E8BFF2508538D00343250 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
 		1F6E9F35222E765F002F5E23 /* libspecInfo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libspecInfo.a; sourceTree = "<group>"; };
 		1FA254DD221A34CD00A55262 /* cameraDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cameraDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA254E0221A34CD00A55262 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -102,6 +111,12 @@
 				1F1B3C81221E419F00802840 /* UIColor+NJColorTool.m */,
 				1FF32C1C2224E9BC007F298D /* UIImage+ImageTool.h */,
 				1FF32C1D2224E9BC007F298D /* UIImage+ImageTool.m */,
+				1F3E8BFE2508538D00343250 /* NSData+BWTBase64.h */,
+				1F3E8BFA2508538C00343250 /* NSData+BWTBase64.m */,
+				1F3E8BFD2508538D00343250 /* RSA.h */,
+				1F3E8BFF2508538D00343250 /* RSA.m */,
+				1F3E8BFC2508538C00343250 /* RSA+SHA1WithRSA.h */,
+				1F3E8BFB2508538C00343250 /* RSA+SHA1WithRSA.m */,
 			);
 			path = TakePhotoSDK;
 			sourceTree = "<group>";
@@ -253,12 +268,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F3E8C022508538D00343250 /* RSA.m in Sources */,
 				1F1B3C87221E419F00802840 /* MBProgressHUD+MJ.m in Sources */,
+				1F3E8C002508538D00343250 /* NSData+BWTBase64.m in Sources */,
 				1F1B3C83221E419F00802840 /* TakeIDPhotoAttentionInfoPopView.m in Sources */,
 				1FA254E5221A34CD00A55262 /* ViewController.m in Sources */,
 				1F1B3C89221E419F00802840 /* MK_Device.m in Sources */,
 				1FA254F0221A34CF00A55262 /* main.m in Sources */,
 				1F1B3C88221E419F00802840 /* UIColor+NJColorTool.m in Sources */,
+				1F3E8C012508538D00343250 /* RSA+SHA1WithRSA.m in Sources */,
 				1FA254E2221A34CD00A55262 /* AppDelegate.m in Sources */,
 				1FF32C1E2224E9BC007F298D /* UIImage+ImageTool.m in Sources */,
 				1F1B3C85221E419F00802840 /* NetTool.m in Sources */,

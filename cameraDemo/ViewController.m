@@ -47,6 +47,9 @@
     NSLog(@"打开相机Demo");
     
     TakeIDPhotoVC *takePhoto = [[TakeIDPhotoVC alloc] init];
+    
+    takePhoto.orderID = @"20170628300100000707";
+    
     takePhoto.title = @"证件照拍摄";
     
     [takePhoto setFinalImageResult:^(NSString * _Nonnull finalImageUrlString, NSString * _Nonnull finalImageFileName, NSString * _Nonnull finalWatermarkImageUrlString, UIImage * _Nonnull finalWatermarkImage) {

@@ -424,7 +424,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
 - (void)check_createPhoto:(NSData *)data
 {
     
-    [NetTool createAndCheckImage:data success:^(NSDictionary *dataDic) {
+    [NetTool createAndCheckImage:data success:^(NSDictionary *dataDic, NSString *fileurl) {
         
         if (self->_previewImageView) {
             
@@ -465,7 +465,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
                     }
                     
                 }];
-                
+                                
             } else {
                 
                 TakePhotoResultVC *result = [[TakePhotoResultVC alloc] initWithType:NJTakePhotoResultDetectionFailed];
@@ -494,6 +494,9 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
                     }
                     
                 }];
+                
+                /// 传递不通过数据
+                [NetTool postCheckData:dataDic withImage:data userKey:self.orderID];
                 
             }
             
