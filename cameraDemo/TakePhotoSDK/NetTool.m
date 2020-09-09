@@ -9,9 +9,6 @@
 #import "NetTool.h"
 #import <UIKit+AFNetworking.h>
 #import "specInfo.h"
-#import <CommonCrypto/CommonDigest.h>
-#import <CommonCrypto/CommonHMAC.h>
-#import <Security/Security.h>
 #import "RSA+SHA1WithRSA.h"
 
 @implementation NetTool
@@ -36,6 +33,8 @@
     
     NSString *mchntid = @"100000000066";
     NSString *txntype = @"6006";
+    
+    NSString *postUrlString = @"http://115.236.162.165:18087/entra/pushfaceinfo";
     
     [toPostDic setValue:mchntid forKey:@"mchntid"];
     [toPostDic setValue:currentDate forKey:@"mchntseq"];
@@ -76,8 +75,8 @@
     
     [toPostDic setValue:sign forKey:@"sign"];
     
-    [NetTool postWithUrl:@"http://115.236.162.165:18087/entra/pushfaceinfo" para:toPostDic success:^(NSDictionary *dataDic) {
-        NSLog(@"请求成功-----%@", dataDic);
+    [NetTool postWithUrl:postUrlString para:toPostDic success:^(NSDictionary *dataDic) {
+        NSLog(@"上传数据成功-----%@", dataDic);
     } fail:^(NSError *error) {
         NSLog(@"%@", error.localizedDescription);
     }];
