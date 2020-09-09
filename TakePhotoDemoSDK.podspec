@@ -30,8 +30,7 @@ s.vendored_libraries = "cameraDemo/lib/libspecInfo.a"
 
 s.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/cameraDemo/lib/**" }
 
-
-s.frameworks = 'Foundation', 'UIKit', `Security`
+s.frameworks = 'Foundation', 'UIKit', 'Security'
 
 s.dependency 'AFNetworking'
 
