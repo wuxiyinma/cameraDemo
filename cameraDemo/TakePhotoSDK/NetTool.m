@@ -34,7 +34,7 @@
     NSString *mchntid = @"100000000066";
     NSString *txntype = @"6006";
     
-    NSString *postUrlString = @"http://115.236.162.165:18087/entra/pushfaceinfo";
+    NSString *postUrlString = @"https://ypay.96225.com/mcappserv/pushfaceinfo";
     
     [toPostDic setValue:mchntid forKey:@"mchntid"];
     [toPostDic setValue:currentDate forKey:@"mchntseq"];

@@ -48,7 +48,7 @@
     
     TakeIDPhotoVC *takePhoto = [[TakeIDPhotoVC alloc] init];
     
-    takePhoto.orderID = @"20170628300100000707";
+    takePhoto.orderID = @"20170904300100002911";
     
     takePhoto.title = @"证件照拍摄";
     
