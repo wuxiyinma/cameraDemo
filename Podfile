@@ -11,7 +11,7 @@ target 'cameraDemo' do
   pod 'Masonry'
   pod 'SDWebImage', '~> 4.0'
   pod 'YYModel'
-  pod 'MBProgressHUD', '~> 1.1.0'
+  pod 'MBProgressHUD', '1.2.0'
   pod 'LLSimpleCamera'
   pod 'TZImagePickerController', '3.6.0'
 

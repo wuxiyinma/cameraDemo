@@ -102,7 +102,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 ## MBProgressHUD
 
-Copyright © 2009-2016 Matej Bukovinski
+Copyright © 2009-2020 Matej Bukovinski
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

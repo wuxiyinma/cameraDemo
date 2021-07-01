@@ -40,7 +40,7 @@ s.dependency 'SDWebImage'
 
 s.dependency 'LLSimpleCamera'
 
-s.dependency 'MBProgressHUD'
+s.dependency 'MBProgressHUD', '1.2.0'
 
 s.dependency 'TZImagePickerController', '3.6.0'
 

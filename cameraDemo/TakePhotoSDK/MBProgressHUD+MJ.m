@@ -21,11 +21,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     
     hud.mode = MBProgressHUDModeText;
-    
-    hud.bezelView.color = [UIColor blackColor];
-    
-    hud.contentColor = [UIColor whiteColor];
-    
+
     hud.label.text = text;
     hud.label.numberOfLines = 0;
     
