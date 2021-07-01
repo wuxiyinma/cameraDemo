@@ -13,6 +13,7 @@ target 'cameraDemo' do
   pod 'YYModel'
   pod 'MBProgressHUD', '~> 1.1.0'
   pod 'LLSimpleCamera'
+  pod 'TZImagePickerController', '3.6.0'
 
 
 end

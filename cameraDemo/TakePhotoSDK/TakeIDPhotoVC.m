@@ -16,7 +16,8 @@
 #import "NetTool.h"
 #import "MBProgressHUD+MJ.h"
 #import "UIImage+ImageTool.h"
-//#import <Photos/Photos.h>
+#import <PhotosUI/PhotosUI.h>
+#import "TZImagePickerController.h"
 
 static CGFloat scanTime = 3.0;
 static CGFloat scanLineWidth = 42;
@@ -26,7 +27,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
 #define kAPPH [[UIScreen mainScreen] bounds].size.height
 #define kAPPW [[UIScreen mainScreen] bounds].size.width
 
-@interface TakeIDPhotoVC () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface TakeIDPhotoVC () <UINavigationControllerDelegate, TZImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UIView *scanLine;
 
@@ -372,24 +373,27 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
 // 打开相册
 - (void)openAlbum
 {
+
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+    imagePickerVc.maxImagesCount = 1;
+    imagePickerVc.allowTakePicture = false;
+    imagePickerVc.allowPickingOriginalPhoto = true;
+    imagePickerVc.isSelectOriginalPhoto = false;
+    imagePickerVc.allowPickingVideo = false;
+    imagePickerVc.processHintStr = @"";
+    imagePickerVc.allowPreview = false;
+    imagePickerVc.preferredLanguage = @"zh-Hans";
+    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+
+        UIImage *original = photos.firstObject;
+        NSData *originalData = UIImageJPEGRepresentation([UIImage fixOrientation:original], 1.0);
+        [self check_createPhoto:originalData];
+        self.previewImageView.image = original;
+        [self closeButtonEnable:NO];
+            
+    }];
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-            
-            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; // 设置控制器类型
-            
-            picker.delegate = self; // 设置代理
-            
-            picker.allowsEditing = NO;
-            
-            [self presentViewController:picker animated:YES completion:nil];
-            
-        });
-        
-    }
+    [self presentViewController:imagePickerVc animated:YES completion:nil];
     
 }
 
@@ -400,6 +404,8 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     [self.camera togglePosition];
     
 }
+
+#pragma TZImagePickerControllerDelegate
 
 #pragma UIImagePickerControllerDelegate
 // 获取图片后操作
