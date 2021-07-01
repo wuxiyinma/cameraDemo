@@ -3,11 +3,11 @@
 Pod::Spec.new do |s|
 
 s.name         = "TakePhotoSDK"
-s.version      = "0.0.1"
-s.summary      = "拍照SDK～"
+s.version      = "2.0.0"
+s.summary      = "拍照SDK"
 
 s.description  = <<-DESC
-拍照SDK～
+iOS 拍照 SDK
 DESC
 
 s.homepage     = "https://git.coding.net/smallLufei/cameraDemo.git"
@@ -41,5 +41,7 @@ s.dependency 'SDWebImage'
 s.dependency 'LLSimpleCamera'
 
 s.dependency 'MBProgressHUD'
+
+s.dependency 'TZImagePickerController', '3.6.0'
 
 end

@@ -16,7 +16,6 @@
 #import "NetTool.h"
 #import "MBProgressHUD+MJ.h"
 #import "UIImage+ImageTool.h"
-#import <PhotosUI/PhotosUI.h>
 #import "TZImagePickerController.h"
 
 static CGFloat scanTime = 3.0;
