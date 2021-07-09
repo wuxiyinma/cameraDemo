@@ -382,6 +382,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     imagePickerVc.processHintStr = @"";
     imagePickerVc.allowPreview = false;
     imagePickerVc.preferredLanguage = @"zh-Hans";
+    imagePickerVc.naviBgColor = [UIColor whiteColor];
     imagePickerVc.naviTitleColor = [UIColor stringTOColor:@"#333333"];
     imagePickerVc.barItemTextColor = [UIColor stringTOColor:@"#333333"];
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
