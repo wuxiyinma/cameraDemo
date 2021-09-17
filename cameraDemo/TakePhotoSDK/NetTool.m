@@ -76,7 +76,9 @@
     [toPostDic setValue:sign forKey:@"sign"];
     
     [NetTool postWithUrl:postUrlString para:toPostDic success:^(NSDictionary *dataDic) {
+        
         NSLog(@"上传数据成功-----%@", dataDic);
+        
     } fail:^(NSError *error) {
         NSLog(@"%@", error.localizedDescription);
     }];
@@ -122,7 +124,7 @@
             AFHTTPSessionManager *manager = [self sharedManager];
             [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
             manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript",@"text/plain", nil];
 
             [manager POST:resultDic[@"host"] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
