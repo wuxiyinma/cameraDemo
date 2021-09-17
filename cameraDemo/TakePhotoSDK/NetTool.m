@@ -100,30 +100,42 @@
                 @"policy":resultDic[@"policy"],
                 @"success_action_status":@(200),
             };
-            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-            [manager POST:resultDic[@"host"] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-                [formData appendPartWithFormData:data name:@"file"];
-            } progress:^(NSProgress * _Nonnull uploadProgress) {
-            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                NSDictionary *dic = @{
-                                      @"file":resultDic[@"key"],
-                                      @"spec_id":@([specInfo spec_id]),
-                                      @"app_key":[specInfo app_key],
-                                      @"is_fair":@([specInfo isFair])
-                                      };
-                [NetTool postWithUrl:@"http://apicall.id-photo-verify.com/api/cut_check_pic" para:dic success:^(NSDictionary *dataDic) {
-                    successBlock(dataDic, resultDic[@"origin_pic_url"]);
-                } fail:^(NSError *error) {
-                    failBlock(error);
-                }];
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                failBlock(error);
-            }];
+            NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:resultDic[@"host"] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                    [formData appendPartWithFormData:data name:@"file"];
+                } error:nil];
+            AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSessionUploadTask *uploadTask;
+            uploadTask = [manager
+                          uploadTaskWithStreamedRequest:request
+                          progress:^(NSProgress * _Nonnull uploadProgress) {
+                          }
+                          completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                              if (error) {
+                                  /// error
+                                  failBlock(error);
+                              } else {
+                                  /// success
+                                  NSDictionary *dic = @{
+                                                        @"file":resultDic[@"key"],
+                                                        @"spec_id":@([specInfo spec_id]),
+                                                        @"app_key":[specInfo app_key],
+                                                        @"is_fair":@([specInfo isFair])
+                                                        };
+                                  [NetTool postWithUrl:@"http://apicall.id-photo-verify.com/api/cut_check_pic" para:dic success:^(NSDictionary *dataDic) {
+                                      successBlock(dataDic, resultDic[@"origin_pic_url"]);
+                                  } fail:^(NSError *error) {
+                                      failBlock(error);
+                                  }];
+                              }
+                          }];
+            [uploadTask resume];
+        } else {
+            NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:600 userInfo:@{NSLocalizedDescriptionKey:@"未知错误"}];
+            failBlock(error);
         }
     } fail:^(NSError *error) {
         failBlock(error);
     }];
-    
 }
 
 + (void)getWithUrl:(NSString *)urlString param:(NSDictionary *)dict success:(void (^)(NSDictionary *dataDic))successBlock fail:(void (^)(NSError *error))failBlock
