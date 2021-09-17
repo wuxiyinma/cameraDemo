@@ -13,18 +13,6 @@
 
 @implementation NetTool
 
-+ (AFHTTPSessionManager *)sharedManager {
-    static AFHTTPSessionManager *_sharedManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        _sharedManager = [AFHTTPSessionManager manager];
-        
-    });
-    
-    return _sharedManager;
-}
-
 + (void)postCheckData:(NSDictionary *)dic withImage:(NSData *)fileData userKey:(NSString *)orderID {
     
     NSMutableDictionary *toPostDic = [NSMutableDictionary dictionary];
@@ -76,11 +64,9 @@
     [toPostDic setValue:sign forKey:@"sign"];
     
     [NetTool postWithUrl:postUrlString para:toPostDic success:^(NSDictionary *dataDic) {
-        
-        NSLog(@"上传数据成功-----%@", dataDic);
-        
+//        NSLog(@"上传数据成功-----%@", dataDic);
     } fail:^(NSError *error) {
-        NSLog(@"%@", error.localizedDescription);
+//        NSLog(@"%@", error.localizedDescription);
     }];
         
 }
@@ -104,59 +90,36 @@
 
 + (void)createAndCheckImage:(NSData *)data success:(void (^)(NSDictionary *dataDic, NSString *fileurl))successBlock fail:(void (^)(NSError *error))failBlock;
 {
-    
     [NetTool getWithUrl:@"http://apicall.id-photo-verify.com/api/get_upload_policy" param:@{@"file_name":@"image.jpg"} success:^(NSDictionary *dataDic) {
-                        
         if ([dataDic[@"code"] intValue] == 200) {
-            
             NSDictionary *resultDic = dataDic[@"result"];
-            
             NSDictionary *dic = @{
-                
                 @"key":resultDic[@"key"],
                 @"OSSAccessKeyId":resultDic[@"OSSAccessKeyId"],
                 @"signature":resultDic[@"signature"],
                 @"policy":resultDic[@"policy"],
                 @"success_action_status":@(200),
-                
             };
-            
-            AFHTTPSessionManager *manager = [self sharedManager];
-            [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-            manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript",@"text/plain", nil];
-
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             [manager POST:resultDic[@"host"] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-                
                 [formData appendPartWithFormData:data name:@"file"];
-                
             } progress:^(NSProgress * _Nonnull uploadProgress) {
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                
                 NSDictionary *dic = @{
                                       @"file":resultDic[@"key"],
                                       @"spec_id":@([specInfo spec_id]),
                                       @"app_key":[specInfo app_key],
                                       @"is_fair":@([specInfo isFair])
                                       };
-
                 [NetTool postWithUrl:@"http://apicall.id-photo-verify.com/api/cut_check_pic" para:dic success:^(NSDictionary *dataDic) {
-
                     successBlock(dataDic, resultDic[@"origin_pic_url"]);
-
                 } fail:^(NSError *error) {
-
                     failBlock(error);
-
                 }];
-                
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 failBlock(error);
             }];
-                        
         }
-        
     } fail:^(NSError *error) {
         failBlock(error);
     }];
@@ -166,61 +129,32 @@
 + (void)getWithUrl:(NSString *)urlString param:(NSDictionary *)dict success:(void (^)(NSDictionary *dataDic))successBlock fail:(void (^)(NSError *error))failBlock
 {
     NSString *urlStr;
-    
     if (![NSURL URLWithString:urlString]) {
-        //        urlStr = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        
         NSCharacterSet *allowedCharacters = [NSCharacterSet URLFragmentAllowedCharacterSet];
-        
         urlStr = [urlString stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
-        
     } else {
         urlStr = urlString;
     }
-    
-    AFHTTPSessionManager *manager = [self sharedManager];
-    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json" , @"text/html", nil];
-    
-    
     [manager GET:urlStr parameters:dict progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-        
-        
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
         successBlock(responseObject);
-        
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
         failBlock(error);
-        
     }];
 }
 
 + (void)postWithUrl:(NSString *)urlString para:(NSDictionary *)dict success:(void (^)(NSDictionary *dataDic))successBlock fail:(void (^)(NSError *error))failBlock {
-    
-    AFHTTPSessionManager *manager = [self sharedManager];
-    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", nil];
-    
     [manager POST:urlString parameters:dict progress:^(NSProgress * _Nonnull uploadProgress) {
-        
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                
         successBlock(responseObject);
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
         failBlock(error);
-        
     }];
 }
 
