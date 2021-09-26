@@ -131,10 +131,10 @@
     
     // 无水印
     _imageFileName = _imageUrlArray.lastObject;
-    _imagePostUrl = @"http://apicall.id-photo-verify.com/api/take_cut_pic";
+    _imagePostUrl = @"https://apicall.id-photo-verify.com/api/take_cut_pic";
     
     // 有水印
-    _imageUrlString_wm = [NSString stringWithFormat:@"http://apicall.id-photo-verify.com/api/take_pic_wm/%@", _wmImageUrlArray.lastObject];
+    _imageUrlString_wm = [NSString stringWithFormat:@"https://apicall.id-photo-verify.com/api/take_pic_wm/%@", _wmImageUrlArray.lastObject];
     
     [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:_imageUrlString_wm] placeholderImage:[UIImage imageNamed:@"Image.bundle/等待"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
 

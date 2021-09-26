@@ -90,7 +90,7 @@
 
 + (void)createAndCheckImage:(NSData *)data success:(void (^)(NSDictionary *dataDic, NSString *fileurl))successBlock fail:(void (^)(NSError *error))failBlock;
 {
-    [NetTool getWithUrl:@"http://apicall.id-photo-verify.com/api/get_upload_policy" param:@{@"file_name":@"image.jpg"} success:^(NSDictionary *dataDic) {
+    [NetTool getWithUrl:@"https://apicall.id-photo-verify.com/api/get_upload_policy" param:@{@"file_name":@"image.jpg"} success:^(NSDictionary *dataDic) {
         if ([dataDic[@"code"] intValue] == 200) {
             NSDictionary *resultDic = dataDic[@"result"];
             NSDictionary *dic = @{
@@ -121,7 +121,7 @@
                                                         @"app_key":[specInfo app_key],
                                                         @"is_fair":@([specInfo isFair])
                                                         };
-                                  [NetTool postWithUrl:@"http://apicall.id-photo-verify.com/api/cut_check_pic" para:dic success:^(NSDictionary *dataDic) {
+                                  [NetTool postWithUrl:@"https://apicall.id-photo-verify.com/api/cut_check_pic" para:dic success:^(NSDictionary *dataDic) {
                                       successBlock(dataDic, resultDic[@"origin_pic_url"]);
                                   } fail:^(NSError *error) {
                                       failBlock(error);
