@@ -10,7 +10,7 @@ s.description  = <<-DESC
 iOS 拍照 SDK
 DESC
 
-s.homepage     = "https://git.coding.net/smallLufei/cameraDemo.git"
+s.homepage     = "https://github.com/wuxiyinma/cameraDemo.git"
 
 s.license      = "MIT"
 
@@ -20,7 +20,7 @@ s.platform     = :ios, "8.0"
 
 s.resource  = "cameraDemo/TakePhotoSDK/Image.bundle"
 
-s.source       = { :git => "https://git.coding.net/smallLufei/cameraDemo.git", :tag => "#{s.version}" }
+s.source       = { :git => "https://github.com/wuxiyinma/cameraDemo.git", :tag => "#{s.version}" }
 
 s.source_files  = "TakePhotoSDK","cameraDemo/TakePhotoSDK/*.*"
 
@@ -42,6 +42,6 @@ s.dependency 'LLSimpleCamera'
 
 s.dependency 'MBProgressHUD', '1.2.0'
 
-s.dependency 'TZImagePickerController', '3.6.0'
+s.dependency 'TZImagePickerController', '3.8.8'
 
 end
